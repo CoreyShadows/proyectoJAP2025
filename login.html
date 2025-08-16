@@ -12,6 +12,63 @@
   <!-- <div class="logo">Jóvenes a Programar</div> -->
   </header>
 
+<!-- PRUEBA CLIMA /div> -->
+
+<div id="info-tiempo">
+  <span id="fecha"></span> |
+  <span id="hora"></span>
+</div>
+
+<script>
+  const fecha = new Date();
+  document.getElementById('fecha').textContent = fecha.toLocaleDateString('es-UY', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+
+  document.getElementById('hora').textContent = fecha.toLocaleTimeString('es-UY', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+</script>
+
+
+
+
+
+
+
+
+<div id="clima">
+  <span id="temperatura"></span> |
+  <span id="estado"></span>
+</div>
+
+<script>
+  const API_KEY = '00edb26c00b5a552463408c57964037e';
+  const ciudad = 'Montevideo';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${API_KEY}&units=metric&lang=es`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const temp = Math.round(data.main.temp);
+      const estado = data.weather[0].description;
+      document.getElementById('temperatura').textContent = `${temp}°C`;
+      document.getElementById('estado').textContent = estado.charAt(0).toUpperCase() + estado.slice(1);
+    });
+</script>
+
+
+
+00edb26c00b5a552463408c57964037e
+
+<!-- PRUEBA CLIMA /div> -->
+
+
+
   <main>
     <section class="login-container">
       <form class="login-form">
