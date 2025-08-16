@@ -8,20 +8,19 @@
 
 body {
   font-family: 'Open sans', sans-serif;
-  background-color: #0b1e3f;
+  background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
   color: #ffffff;
   width: 100%;
   height: 100vh;
 }
 .header {
-  background-color:#081a36;
+ background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 20px;
   width: 100%;         
-  position: fixed;   
   top: 0;              
   left: 0;             
   z-index: 1000;   
@@ -115,4 +114,54 @@ nav a:hover {
   font-size: 2.25rem;
   padding: 15px;
   margin-top: 15px;
+}
+
+.Main-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px;
+  padding: 20px;
+}
+
+.recomendados {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+
+footer{
+    background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+
+}
+.container a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding-bottom: 15px;
+}
+#Volver {
+  padding-bottom: 5px;
+  color: #4520e9;
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
