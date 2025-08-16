@@ -11,7 +11,7 @@ body {
   background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
   color: #ffffff;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;                         /* height: 100vh;*/
 }
 .header {
   background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
@@ -163,14 +163,34 @@ nav a:hover {
 }
 
 footer{
-    background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
+
+
+
+
+   width: 100%; /* aseguro que ocupa todo el ancho */
+  padding: 20px 0; /* agrego un poco de espacio arriba y abajo */
+  background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+
+
+
+    /*background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   
 
-}
+  
+} */
+
 .container a {
   color: #fff;
   text-decoration: none;
