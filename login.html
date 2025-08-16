@@ -22,6 +22,12 @@
   <div id="linea-2">
     <span id="temperatura"></span> |
     <span id="estado"></span>
+
+<img id="icono-clima" src="" alt="Icono del clima">
+    <span id="ciudad"></span>
+
+
+
   </div>
 </div>
 
@@ -104,6 +110,13 @@
     .then(data => {
       const temp = Math.round(data.main.temp);
       const estado = data.weather[0].description;
+ const iconCode = data.weather[0].icon;
+document.getElementById("icono-clima").src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+
+
+
+
       document.getElementById('temperatura').textContent = `${temp}°C`;
       document.getElementById('estado').textContent = estado.charAt(0).toUpperCase() + estado.slice(1);
     });
@@ -117,6 +130,10 @@
 
   <footer>
     <p>© 2025 Jóvenes a Programar. Todos los derechos reservados.</p>
+
+
+
+   
 </body>
 
 
