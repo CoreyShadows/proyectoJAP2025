@@ -195,3 +195,8 @@ main {
   justify-content: center;
   padding: 20px;
 }
+
+.objeto:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(67, 124, 228, 0.3);
+}
