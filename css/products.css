@@ -14,7 +14,7 @@ body {
   height: 100vh;
 }
 .header {
- background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
+  background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
   text-align: center;
   display: flex;
   align-items: center;
@@ -27,12 +27,6 @@ body {
   height: 75px;  
 }
 
-#logo {
-    width: 300px;
-    height: 75px;
-   padding-left: 10px;
-   padding-top: 15px;
-}
 
 
 .navbar {
@@ -63,7 +57,7 @@ nav a:hover {
 
 
 .buscar {
- margin-top: 18px;
+  margin-top: 18px;
   position: relative;
   width: 500px;
 }
@@ -80,11 +74,9 @@ nav a:hover {
 }
 
 .buscar button {
-    
   position: absolute;
   right: 10px;
-
-    top: 50%;
+  top: 50%;
   transform: translateY(-50%);
   border: none;
   background: #1e2767;
@@ -133,6 +125,37 @@ nav a:hover {
   margin-top: 20px;
 }
 
+.objeto {
+  background-color: #081a36;
+  margin: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  max-width: 700px;
+}
+
+.logo {
+  width: 300px;
+  height: 200px;
+  border-radius: 1rem;
+}
+
+.descripcion {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.datos {
+  margin-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.infoventa {
+  display: flex;
+  justify-content: space-between;
+}
 
 footer{
     background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
