@@ -7,6 +7,7 @@ document.querySelector("form").addEventListener("submit", function(e){
     if (nombre === "" || contraseña === "") {
         alert("Por favor, complete todos los campos.");
     } else {
+        localStorage.setItem("usuarioLogueado", nombre);
         window.location.href = "index.html"; 
     }
 })
