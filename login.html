@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jóvenes a Programar - Login</title>
+  <link rel="stylesheet" href="css/login.css" />
+</head>
+<body>
+  <header>
+    <img src="img/logo-jap.png" alt="Logo" class="logo-image" />
+  <!-- <div class="logo">Jóvenes a Programar</div> -->
+  </header>
+
+  <main>
+    <section class="login-container">
+      <form class="login-form">
+        <h2>Iniciar Sesión</h2>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Usuario"  />
+
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="Contraseña"  />
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="keep-logged" />
+          <label for="keep-logged">Mantener sesión iniciada</label>
+        </div>
+
+        <button type="submit">¡Ingresar!</button>
+
+        <div class="links">
+          <a href="#">¿Olvidaste tu contraseña?</a>
+          <a href="#">¿No tienes una cuenta? Regístrate!</a>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="js/login.js"></script>
+</body>
+</html>
