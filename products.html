@@ -15,17 +15,18 @@
 </head>
 
 <body>
-    <div class="header">
-        <img src="img/logo-jap.png" id="logo" alt="Logo" class="logo-image" />
-        <div class=" buscar">
-            <input type="text" placeholder="buscar" required>
-            <button> <i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <a id="login-logo" href="index.html"><i class="fa-solid fa-user"></i></a>
-            <a  id= "carrito-logo" href="products.html"><i class="fa-solid fa-bag-shopping"></i></a>
-        </div>
+    <div class="header" id="Header">
+    <img src="img/logo-jap.png" id="logo" alt="Logo" class="logo-image" />
+    <div class="buscar">
+        <input type="text" placeholder="Buscar" required>
+        <button> <i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <a id="login-logo" href="index.html"><i class="fa-solid fa-user"></i></a>
+        <a id="carrito-logo" href="products.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    </div>
+</div>
+
 
 
 
@@ -39,81 +40,15 @@
         <div class="rec-links">
             <a href="" class="links">Camionetas</a>
             <a href="" class="links">Deportivos</a>
-            <a href="" class="links">Bicis</a>
-            <a href="" class="links">Ruedas quemadas</a>
+            <a href="" class="links">SUV</a>
+            <a href="" class="links">Autos</a>
         </div>
     </div>
 
 
 
 
-    <div class="Main-1">
-
-        <div class="objeto">
-            <img src="img/prod40281_2.jpg" class="imgproducto" alt="Logo" class="logo-image" />
-            <div class="datos">
-                <div>
-                    <h2>Camioneta hilux</h2>
-                    <p class="descripcion">SOY FRANCHSESCO VIRGOLINI EL AUTO MAS RAPIDO DE TOTA ITALIE</p>
-                </div>
-                <div class="infoventa">
-                    <p>Ventas: 2</p>
-                    <h3>30000€</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="objeto">
-            <img src="img/prod40281_2.jpg" class="imgproducto" alt="Logo" class="logo-image" />
-            <div class="datos">
-                <div>
-                    <h2>Camioneta hilux</h2>
-                    <p class="descripcion">SOY FRANCHSESCO VIRGOLINI EL AUTO MAS RAPIDO DE TOTA ITALIE</p>
-                </div>
-                <div class="infoventa">
-                    <p>Ventas: 2</p>
-                    <h3>30000€</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="objeto">
-            <img src="img/prod40281_2.jpg" class="imgproducto" alt="Logo" class="logo-image" />
-            <div class="datos">
-                <div>
-                    <h2>Camioneta hilux</h2>
-                    <p class="descripcion">SOY FRANCHSESCO VIRGOLINI EL AUTO MAS RAPIDO DE TOTA ITALIE</p>
-                </div>
-                <div class="infoventa">
-                    <p>Ventas: 2</p>
-                    <h3>30000€</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="objeto">
-            <img src="img/prod40281_2.jpg" class="imgproducto" alt="Logo" class="logo-image" />
-            <div class="datos">
-                <div>
-                    <h2>Camioneta hilux</h2>
-                    <p class="descripcion">SOY FRANCHSESCO VIRGOLINI EL AUTO MAS RAPIDO DE TOTA ITALIE</p>
-                </div>
-                <div class="infoventa">
-                    <p>Ventas: 2</p>
-                    <h3>30000€</h3>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <main class="pb-5 container">
-        <div class="container">
-            <div class="alert alert-danger text-center" role="alert">
-            <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-            </div>
-        </div>
-    </main>
+    <div class="Main-1"> </div>
 
     <footer class="text-muted">
         <div class="container">
@@ -132,6 +67,87 @@
             <div></div>
         </div>
     </div>
+    <script id="products-data" type="application/json">
+{
+  "catID": 101,
+  "catName": "Autos",
+  "products": [
+      {
+          "id": 50921,
+          "name": "Chevrolet Onix Joy",
+          "description": "Generación 2019, variedad de colores. Motor 1.0, ideal para ciudad.",
+          "cost": 13500,
+          "currency": "USD",
+          "soldCount": 14,
+          "image": "img/prod50921_1.jpg"
+      },
+      {
+          "id": 50922,
+          "name": "Fiat Way",
+          "description": "La versión de Fiat que brinda confort y a un precio accesible.",
+          "cost": 14500,
+          "currency": "USD",
+          "soldCount": 52,
+          "image": "img/prod50922_1.jpg"
+      },
+      {
+          "id": 50923,
+          "name": "Suzuki Celerio",
+          "description": "Un auto que se ha ganado la buena fama por su economía con el combustible.",
+          "cost": 12500,
+          "currency": "USD",
+          "soldCount": 25,
+          "image": "img/prod50923_1.jpg"
+      },
+      {
+          "id": 50924,
+          "name": "Peugeot 208",
+          "description": "El modelo de auto que se sigue renovando y manteniendo su prestigio en comodidad.",
+          "cost": 15200,
+          "currency": "USD",
+          "soldCount": 17,
+          "image": "img/prod50924_1.jpg"
+      },
+      {
+          "id": 50925,
+          "name": "Bugatti Chiron",
+          "description": "El mejor hiperdeportivo de mundo. Producción limitada a 500 unidades.",
+          "cost": 3500000,
+          "currency": "USD",
+          "soldCount": 0,
+          "image": "img/prod50925_1.jpg"
+      }
+  ]
+}
+</script>
+<script>
+  const data = JSON.parse(document.getElementById("products-data").textContent);
+  const container = document.querySelector(".Main-1");
+
+  container.innerHTML = "";
+
+  data.products.forEach(product => {
+      const objDiv = document.createElement("div");
+      objDiv.classList.add("objeto");
+
+      objDiv.innerHTML = `
+          <img src="${product.image}" class="imgproducto" alt="${product.name}" />
+          <div class="datos">
+              <div>
+                  <h2>${product.name}</h2>
+                  <p class="descripcion">${product.description}</p>
+              </div>
+              <div class="infoventa">
+                  <p>Ventas: ${product.soldCount}</p>
+                  <h3>${product.cost} ${product.currency}</h3>
+              </div>
+          </div>
+      `;
+
+      container.appendChild(objDiv);
+  });
+</script>
+
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/products.js"></script>
