@@ -1,3 +1,12 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const usuario = localStorage.getItem("usuarioLogueado");
+
+    if (!usuario) {
+        // No hay sesión → al login
+        window.location.href = "login.html";
+    }
+});
+
 let productCost = 0;
 let productCount = 0;
 let comissionPercentage = 0.13;
