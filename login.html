@@ -15,8 +15,14 @@
 <!-- PRUEBA CLIMA /div> -->
 
 <div id="info-tiempo">
-  <span id="fecha"></span> |
-  <span id="hora"></span>
+  <div id="linea-1">
+    <span id="fecha"></span> |
+    <span id="hora"></span>
+  </div>
+  <div id="linea-2">
+    <span id="temperatura"></span> |
+    <span id="estado"></span>
+  </div>
 </div>
 
 <script>
@@ -81,6 +87,36 @@
     </section>
   </main>
   <script src="js/login.js"></script>
+
+
+
+
+
+
+
+  <script>
+  const API_KEY = '00edb26c00b5a552463408c57964037e';
+  const ciudad = 'Montevideo';
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${API_KEY}&units=metric&lang=es`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const temp = Math.round(data.main.temp);
+      const estado = data.weather[0].description;
+      document.getElementById('temperatura').textContent = `${temp}°C`;
+      document.getElementById('estado').textContent = estado.charAt(0).toUpperCase() + estado.slice(1);
+    });
+</script>
+
+
+
+
+
+
+
+  <footer>
+    <p>© 2023 Jóvenes a Programar. Todos los derechos reservados.</p>
 </body>
 
 
