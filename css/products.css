@@ -15,7 +15,7 @@ body {
   padding: 0;
 
 
-  min-height: 100vh;                         /* height: 100vh;*/
+  min-height: 100vh;              /* height: 100vh;*/
 }
 .header {
   background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
@@ -167,10 +167,6 @@ nav a:hover {
 }
 
 .footer{
-
-
-
-
    width: 100%; /* aseguro que ocupa todo el ancho */
   padding: 20px 0; /* agrego un poco de espacio arriba y abajo */
   background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
