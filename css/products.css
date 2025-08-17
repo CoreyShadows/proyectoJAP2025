@@ -1,3 +1,12 @@
+
+:root {
+  --color-primario: #FFFFFF;
+  --color-secundario: #060f1f;
+  --Texto:  #060f1f;
+  --color-gris: #F5F5F5;
+}
+
+
 * {
   margin: 0;
   padding: 0;
@@ -8,23 +17,28 @@
 
 body {
   font-family: 'Open sans', sans-serif;
-  background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
+  background: var(--color-primario);
   color: #ffffff;
   width: 100%;
    margin: 0;
   padding: 0;
 
 
+<<<<<<< HEAD
   min-height: 100vh;              /* height: 100vh;*/
+=======
+  min-height: 100vh;                      
+>>>>>>> 4e83e2a7c6d13bbb504c4244a2f790b82ae33b69
 }
 .header {
-  background: linear-gradient(90deg, #081a36 0%, #0b1e3f 100%);
+background:var(--color-secundario);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 75px;
+  height: 70px;
   padding: 0 20px;
   position: relative; 
+  border-radius: 0 0 20px 20px;
 }
 
 
@@ -81,7 +95,7 @@ nav a:hover {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: #1e2767;
+  background: var(--color-secundario);
   color: #fff;
   border-radius: 50%;
   width: 32px;
@@ -125,15 +139,31 @@ nav a:hover {
   justify-content: center;
   flex-direction: column;
   margin-top: 20px;
+  color: #060f1f;
+}
+
+.rec-links a {
+  color: var(--color-secundario) ;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.rec-links a:hover {
+  background-color: #ff9900;
+  color: var(--color-primario);
 }
 
 .objeto {
-  background-color: #081a36;
+  background-color: var(--color-gris);
   margin: 1rem;
   padding: 2rem;
   border-radius: 1rem;
   display: flex;
   max-width: 700px;
+  color: var(--color-secundario);
 }
 
 .imgproducto {
@@ -144,9 +174,9 @@ nav a:hover {
 
 #logo {
     width: 300px;
-    height: 75px;
+    height: 70px;
   padding-left: 10px;
-  padding-top: 15px;
+   padding-top: 5px;
 }
 
 .descripcion {
@@ -167,66 +197,37 @@ nav a:hover {
 }
 
 .footer{
+<<<<<<< HEAD
    width: 100%; /* aseguro que ocupa todo el ancho */
   padding: 20px 0; /* agrego un poco de espacio arriba y abajo */
+=======
+
+   width: 100%; 
+  padding: 20px 0; 
+>>>>>>> 4e83e2a7c6d13bbb504c4244a2f790b82ae33b69
   background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  color: #F5F5F5;
+  
 }
-
-
-
-
-
-
-    /*background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  
-
-  
-} */
-
-.container a {
-  color: #fff;
+.container {
+  color: var(--color-secundario);
   text-decoration: none;
   font-weight: 600;
   padding-bottom: 15px;
-}
-#Volver {
-  padding-bottom: 5px;
-  color: #4520e9;
-  text-decoration: none;
-  align-items: center;
+  display: flex;
   justify-content: center;
-  display: flex;
-}
-
-main {
-  display: flex;
+  align-items: center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.rec-links a {
-  color: #ff9900;
-  text-decoration: none;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 6px;
-  transition: 0.3s;
 }
 
-.rec-links a:hover {
-  background-color: #ff9900;
-  color: #ffffff;
+.container a {
+  padding: 10px;
+   text-decoration: none;
+   color: #265ebd
 }
+
+
+
 
 html {
   scroll-behavior: smooth;
