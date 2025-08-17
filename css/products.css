@@ -3,7 +3,7 @@
   --color-primario: #FFFFFF;
   --color-secundario: #060f1f;
   --Texto:  #060f1f;
-  --color-gris-oscuro: #374151;
+  --color-gris: #F5F5F5;
 }
 
 
@@ -17,7 +17,7 @@
 
 body {
   font-family: 'Open sans', sans-serif;
-  background: #FFFFFF;
+  background: var(--color-primario);
   color: #ffffff;
   width: 100%;
    margin: 0;
@@ -27,7 +27,7 @@ body {
   min-height: 100vh;                      
 }
 .header {
-background:#060f1f;
+background:var(--color-secundario);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -91,7 +91,7 @@ nav a:hover {
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background: #060f1f;
+  background: var(--color-secundario);
   color: #fff;
   border-radius: 50%;
   width: 32px;
@@ -139,7 +139,7 @@ nav a:hover {
 }
 
 .rec-links a {
-  color:#060f1f ;
+  color: var(--color-secundario) ;
   text-decoration: none;
   font-weight: bold;
   padding: 5px 10px;
@@ -149,17 +149,17 @@ nav a:hover {
 
 .rec-links a:hover {
   background-color: #ff9900;
-  color: #ffffff;
+  color: var(--color-primario);
 }
 
 .objeto {
-  background-color:#F5F5F5;
+  background-color: var(--color-gris);
   margin: 1rem;
   padding: 2rem;
   border-radius: 1rem;
   display: flex;
   max-width: 700px;
-  color: #060f1f;
+  color: var(--color-secundario);
 }
 
 .imgproducto {
@@ -201,7 +201,7 @@ nav a:hover {
   
 }
 .container {
-  color: #060f1f;
+  color: var(--color-secundario);
   text-decoration: none;
   font-weight: 600;
   padding-bottom: 15px;
