@@ -5,65 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jóvenes a Programar - Login</title>
   <link rel="stylesheet" href="css/login.css" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+   
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
   <header>
-    <img src="img/logo-jap.png" alt="Logo" class="logo-image" />
-  <!-- <div class="logo">Jóvenes a Programar</div> -->
+     <div class="header" id="Header">
+      <a href="index.html" class="logo-link"><img src="img/logo-jap.png" id="logo" alt="Logo" class="logo-image" /> </a>
+    
+   
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <a id="login-logo" href="login.html"><i class="fa-solid fa-user"></i></a>
+        <a id="carrito-logo" href="products.html"><i class="fa-solid fa-bag-shopping"></i></a>
+    </div>
+</div>
   </header>
-
-<!-- PRUEBA CLIMA /div> -->
-
-<div id="info-tiempo">
-  <div id="linea-1">
-    <span id="fecha"></span> |
-    <span id="hora"></span>
-  </div>
-  <div id="linea-2">
-    <span id="temperatura"></span> |
-    <span id="estado"></span>
-
-<img id="icono-clima" src="" alt="Icono del clima">
-    <span id="ciudad"></span>
-
-
-
-  </div>
-</div>
-
-<script>
-  const fecha = new Date();
-  document.getElementById('fecha').textContent = fecha.toLocaleDateString('es-UY', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-
-  document.getElementById('hora').textContent = fecha.toLocaleTimeString('es-UY', {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-</script>
-
-
-
-
-
-
-
-
-<div id="clima">
-  <span id="temperatura"></span> |
-  <span id="estado"></span>
-</div>
-
-
-
-
-
-
-<!-- PRUEBA CLIMA /div> -->
 
 
 
@@ -79,11 +38,10 @@
         <input type="password" id="password" placeholder="Contraseña"  />
 
         <div class="checkbox-group">
-          <input type="checkbox" id="keep-logged" />
-          <label for="keep-logged">Mantener sesión iniciada</label>
+          <label for="keep-logged"><input type="checkbox" id="keep-logged" />Mantener sesión iniciada</label>
         </div>
 
-        <button type="submit">¡Ingresar!</button>
+        <button type="submit">INGRESAR</button>
 
         <div class="links">
           <a href="#">¿Olvidaste tu contraseña?</a>
