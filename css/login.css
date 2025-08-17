@@ -1,29 +1,92 @@
-/* Reset básico */
+
+:root {
+  --color-primario: #FFFFFF;
+  --color-secundario: #060f1f;
+  --Texto:  #060f1f;
+  --color-gris: #F5F5F5;
+  --links:  #265ebd;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  position: 0;
 }
+
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #d6d8da;
-  color: #070707;
+    font-family: 'Segoe UI', sans-serif;
+  background: var(--color-primario);
+  color:#060f1f;;
+  width: 100%;
+   margin: 0;
+  padding: 0;
+  min-height: 100vh;   
+   display: flex;
+  flex-direction: column;                   
+}
+
+.header {
+background:var(--color-secundario);
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+  padding: 0 20px;
+  position: relative; 
+  border-radius: 0 0 20px 20px;
+  flex-wrap: wrap;
 }
 
-header {
-  padding: 20px;
-  background-color: #081a36;
+#logo {
+    width: 300px;
+    height: 70px;
+  padding-left: 10px;
+   padding-top: 5px;
+}
+.navbar {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #00bfff;
+nav {
+  display: flex;
+  gap: 30px;
 }
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+nav a:hover {
+  background: #1e2767;
+}
+
+
+
+.fa-user {
+  color: #fff;
+    font-size: 1.8rem;
+    padding: 10px;
+}
+
+.fa-bag-shopping {
+  color: #fff;
+  font-size: 1.8rem;
+  padding: 10px;
+  margin-top: 10px;
+}
+
 
 main {
   flex: 1;
@@ -33,7 +96,7 @@ main {
 }
 
 .login-container {
-  background-color: #fff;
+  background-color: var(--color-gris);
   padding: 30px;
   border-radius: 10px;
   width: 100%;
@@ -44,7 +107,7 @@ main {
 .login-form h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #000000;
+  color: var(--Texto);
 }
 
 .login-form label {
@@ -60,35 +123,39 @@ main {
   margin-top: 5px;
   border: none;
   border-radius: 5px;
-  background-color: #ffffff;
-  color: #030303;
+  background-color: var(--color-primario);
+  color: var(--Texto);
 }
 
 .login-form input::placeholder {
-  color: #000000;
+  color:var(--Texto);
 }
-
 .checkbox-group {
-  margin-top: 15px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
-
 .checkbox-group input {
   margin-right: 10px;
+
+  
+
 }
 
+
 button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 20px;
-  background-color: #ffffff;
-  color: #000000;
+  width: 85%;
+  height: 2.25rem;
+  margin: 1rem 0rem 1rem 1.5rem;
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
   font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
 }
 
 button:hover {
@@ -96,15 +163,15 @@ button:hover {
 }
 
 .links {
-  margin-top: 20px;
+  
   text-align: center;
 }
 
 .links a {
   display: block;
-  color: #a0cfff;
+  color: var(--links);
   text-decoration: none;
-  margin-top: 5px;
+
   font-size: 0.9rem;
 }
 
