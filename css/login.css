@@ -7,8 +7,8 @@
 
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0b1e3f;
-  color: #ffffff;
+  background-color: #d6d8da;
+  color: #070707;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -33,7 +33,7 @@ main {
 }
 
 .login-container {
-  background-color: #122b55;
+  background-color: #fff;
   padding: 30px;
   border-radius: 10px;
   width: 100%;
@@ -44,7 +44,7 @@ main {
 .login-form h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #000000;
 }
 
 .login-form label {
@@ -60,12 +60,12 @@ main {
   margin-top: 5px;
   border: none;
   border-radius: 5px;
-  background-color: #1f3b6e;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #030303;
 }
 
 .login-form input::placeholder {
-  color: #cccccc;
+  color: #000000;
 }
 
 .checkbox-group {
@@ -82,8 +82,8 @@ button {
   width: 100%;
   padding: 12px;
   margin-top: 20px;
-  background-color: #00bfff;
-  color: #0b1e3f;
+  background-color: #ffffff;
+  color: #000000;
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -111,10 +111,6 @@ button:hover {
 .links a:hover {
   text-decoration: underline;
 }
-
-
-
-
 
 
 #info-tiempo {
