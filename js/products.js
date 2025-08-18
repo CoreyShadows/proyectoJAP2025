@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector(".Main-1");
 
-  fetch("json/products.json")
+  fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
     .then(response => {
       if (!response.ok) throw new Error("Error al cargar el JSON");
       return response.json();
