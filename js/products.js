@@ -6,3 +6,41 @@ document.addEventListener("DOMContentLoaded", function() {
         window.location.href = "login.html";
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".Main-1");
+
+  fetch("json/products.json")
+    .then(response => {
+      if (!response.ok) throw new Error("Error al cargar el JSON");
+      return response.json();
+    })
+    .then(data => {
+      container.innerHTML = "";
+
+      data.products.forEach(product => {
+        const objDiv = document.createElement("div");
+        objDiv.classList.add("objeto");
+
+        objDiv.innerHTML = `
+          <img src="${product.image}" class="imgproducto" alt="${product.name}" />
+          <div class="datos">
+              <div>
+                  <h2>${product.name}</h2>
+                  <p class="descripcion">${product.description}</p>
+              </div>
+              <div class="infoventa">
+                  <p>Ventas: ${product.soldCount}</p>
+                  <h3>${product.cost} ${product.currency}</h3>
+              </div>
+          </div>
+        `;
+
+        container.appendChild(objDiv);
+      });
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      container.innerHTML = "<p>No se pudo cargar la lista de productos.</p>";
+    });
+});
