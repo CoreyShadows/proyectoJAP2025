@@ -1,208 +1,70 @@
-
 :root {
   --color-primario: #FFFFFF;
   --color-secundario: #060f1f;
-  --Texto:  #060f1f;
+  --Texto: #060f1f;
   --color-gris: #F5F5F5;
-  --links:  #265ebd;
+  --links: #265ebd;
 }
-
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  position: 0;
-}
-
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-  background: var(--color-primario);
-  color:#060f1f;;
-  width: 100%;
-   margin: 0;
-  padding: 0;
-  min-height: 100vh;   
-   display: flex;
-  flex-direction: column;                   
-}
-
-.header {
-background:var(--color-secundario);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-  padding: 0 20px;
-  position: relative; 
-  border-radius: 0 0 20px 20px;
-  flex-wrap: wrap;
-}
-
-#logo {
-    width: 300px;
-    height: 70px;
-  padding-left: 10px;
-   padding-top: 5px;
-}
-.navbar {
-    width: 100px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-nav {
-  display: flex;
-  gap: 30px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 4px;
-  transition: background 0.2s;
-}
-
-nav a:hover {
-  background: #1e2767;
-}
-
-
-
-.fa-user {
-  color: #fff;
-    font-size: 1.8rem;
-    padding: 10px;
-}
-
-.fa-bag-shopping {
-  color: #fff;
-  font-size: 1.8rem;
-  padding: 10px;
-  margin-top: 10px;
-}
-
-
-main {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-container {
-  background-color: var(--color-gris);
-  padding: 30px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.login-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: var(--Texto);
-}
-
-.login-form label {
-  display: block;
-  margin-top: 15px;
-  font-weight: 500;
-}
-
-.login-form input[type="text"],
-.login-form input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  border: none;
-  border-radius: 5px;
+  font-family: 'Segoe UI', sans-serif;
   background-color: var(--color-primario);
   color: var(--Texto);
 }
 
-.login-form input::placeholder {
-  color:var(--Texto);
-}
-.checkbox-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
-.checkbox-group input {
-  margin-right: 10px;
-
-  
-
+/* Card del login */
+.card {
+  background-color: var(--color-gris);
+  border-radius: 10px;
 }
 
+/* Inputs */
+.form-control::placeholder {
+  color: var(--Texto);
+}
 
-button {
-  width: 85%;
-  height: 2.25rem;
-  margin: 1rem 0rem 1rem 1.5rem;
+.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(38, 94, 189, 0.3);
+}
+
+/* Botón */
+.btn-primary {
   background-color: var(--color-secundario);
-  color: var(--color-primario);
-  font-weight: bold;
   border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
+  font-weight: bold;
 }
 
-button:hover {
+.btn-primary:hover {
   background-color: #0099cc;
+  transform: scale(1.02);
+  transition: all 0.3s ease;
 }
 
-.links {
-  
-  text-align: center;
-}
-
-.links a {
-  display: block;
+/* Links */
+a {
   color: var(--links);
   text-decoration: none;
-
   font-size: 0.9rem;
 }
 
-.links a:hover {
+a:hover {
   text-decoration: underline;
 }
 
+/* Responsive ajustes extra */
+@media (max-width: 480px) {
+  .card {
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 0;
+  }
 
-#info-tiempo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 0.9rem;
-  color: #ffffff;
-  background-color: rgba(0,0,0,0.4);
-  padding: 10px 14px;
-  border-radius: 8px;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+  .btn-primary {
+    font-size: 1rem;
+  }
 
-
-#icono-clima {
-width: 50px;
-  height: 50px;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 4px;
-  object-fit: contain;
-
-
+  header img {
+    max-width: 180px;
+  }
 }
