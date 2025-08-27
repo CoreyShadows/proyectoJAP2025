@@ -1,21 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const parrafo_nombre = document.getElementById("nombre_usuario")
   const usuario = localStorage.getItem("usuarioLogueado");
   if (!usuario) {
     window.location.href = "login.html";
-    return;
+  } else {
+    parrafo_nombre.innerHTML = usuario;
   }
 
-
-
-const spinner = document.getElementById("spinner-wrapper");
-spinner.style.display = "block"; // Mostrar spinner
-
-
-
-
-
-
-
+  const spinner = document.getElementById("spinner-wrapper");
+  spinner.style.display = "block"; // Mostrar spinner
 
   const container = document.querySelector(".row.Main-1");
   if (!container) {

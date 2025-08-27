@@ -7,9 +7,18 @@
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   background-color: var(--color-primario);
   color: var(--Texto);
+}
+
+#nombre_usuario {
+  color: white;
+  margin: 0;
+}
+
+a.text-white{
+  font-size: 1rem;
 }
 
 /* Card del login */
@@ -39,6 +48,10 @@ body {
   background-color: #0099cc;
   transform: scale(1.02);
   transition: all 0.3s ease;
+}
+
+.row{
+  display: block;
 }
 
 /* Links */
@@ -79,6 +92,10 @@ main {
     flex: 0 0 500px;
   }
 
+  .row {
+    display: flex;
+  }
+
   .card {
     padding: 3rem !important;
     transform: scale(1.05);
@@ -92,7 +109,7 @@ main {
   .form-control,
   .form-check-label,
   .btn-primary,
-  .mt-3.text-center a {
+  .mt-3.text-center {
     font-size: 1.2rem;
   }
 }
@@ -114,11 +131,15 @@ main {
     font-size: 1.6rem;
   }
 
+  header {
+    gap: 0.5rem;
+  }
+
   .form-label,
   .form-control,
   .form-check-label,
   .btn-primary,
-  .mt-3.text-center a {
+  .mt-3.text-center {
     font-size: 1rem;
   }
 }

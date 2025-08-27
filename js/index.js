@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
     const usuario = localStorage.getItem("usuarioLogueado");
-
     if (!usuario) {
-        // No hay sesión → al login
         window.location.href = "login.html";
+    } else {
+        parrafo_nombre.innerHTML = usuario;
     }
 });
-
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);

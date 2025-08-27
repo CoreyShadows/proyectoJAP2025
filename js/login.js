@@ -12,5 +12,11 @@ document.querySelector("form").addEventListener("submit", function(e){
     }
 })
 
-
+document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (usuario) {
+        parrafo_nombre.innerHTML = usuario;
+    }
+});
 

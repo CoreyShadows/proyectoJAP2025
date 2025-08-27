@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
     const usuario = localStorage.getItem("usuarioLogueado");
-
     if (!usuario) {
-        // No hay sesión → al login
         window.location.href = "login.html";
-    }
+    } else {
+        parrafo_nombre.innerHTML = usuario;
+}
 });
-
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COUNT = "Cant.";

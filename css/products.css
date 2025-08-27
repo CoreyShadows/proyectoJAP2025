@@ -6,11 +6,17 @@
   --links: #265ebd;
 }
 
+
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--color-primario);
   color: var(--Texto);
   min-height: 100vh;
+}
+
+#nombre_usuario {
+  color: white;
+  margin: 0;
 }
 
 /* Tarjetas de producto */
@@ -98,6 +104,10 @@ h1 {
 
   h1 {
     font-size: 1.5rem;
+  }
+
+  header {
+    gap: 0.5rem;
   }
 
   .input-group {
