@@ -12,13 +12,41 @@ body {
   background-color: var(--color-primario);
   color: var(--Texto);
   min-height: 100vh;
+  margin: 0;
 }
+#Header-1{
+  background-color: var(--color-secundario);
 
+  
+}
 #nombre_usuario {
   color: white;
   margin: 0;
 }
 
+#Search-bar {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  z-index: 1;
+  
+.header-search {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header-search .input-group {
+  width: 100%;
+  max-width: 500px;
+  min-width: 220px;
+  padding: 0 1rem;
+}
+
+  
+}
 /* Tarjetas de producto */
 .card {
   border-radius: 10px;
@@ -59,18 +87,6 @@ h1 {
   background-color: #ff9900;
   color: var(--color-primario);
   border-color: #ff9900;
-}
-
-/* Spinner */
-#spinner-wrapper {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(255,255,255,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
 }
 
 .lds-ring {
@@ -204,6 +220,9 @@ h1 {
   .product-card img {
     width: 100%;
     height: auto;
+  }
+  #Nav-items {
+  
   }
 }
 
