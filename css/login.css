@@ -17,6 +17,7 @@ body {
   color: var(--Texto);
   display: flex;
   flex-direction: column;
+
 }
 
 /* Header */
