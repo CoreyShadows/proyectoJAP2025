@@ -16,6 +16,7 @@ body {
 }
 #Header-1{
   background-color: var(--color-secundario);
+ 
 
   
 }
@@ -25,28 +26,14 @@ body {
 }
 
 #Search-bar {
-  width: 45%;
+  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   z-index: 1;
-  
-.header-search {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
 }
 
-.header-search .input-group {
-  width: 100%;
-  max-width: 500px;
-  min-width: 220px;
-  padding: 0 1rem;
-}
-
-  
-}
 /* Tarjetas de producto */
 .card {
   border-radius: 10px;
@@ -131,11 +118,6 @@ h1 {
   }
 }
 
-
-
-
-
-
 /* Estilo base para grilla de productos */
 .products-container {
   display: flex;
@@ -192,6 +174,30 @@ h1 {
   .product-card p {
     font-size: 1rem;
   }
+  #Nav-items{
+    gap: 1rem;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 5px;
+    right: 20px;
+    
+    
+  }
+
+  .login-items {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 15px;
+    
+  }
+
+  #nombre_usuario {
+    font-size: 1.2rem;
+    margin: 0;
 }
 
 /* 320x568 - smartphone pequeño */
@@ -202,7 +208,10 @@ h1 {
     padding: 1rem;
     gap: 1rem;
   }
+#Search-bar {
+  width: 80%;
 
+}
   .product-card {
     max-width: 100%;
     padding: 1rem;
@@ -221,9 +230,7 @@ h1 {
     width: 100%;
     height: auto;
   }
-  #Nav-items {
-  
-  }
+ 
 }
 
 
