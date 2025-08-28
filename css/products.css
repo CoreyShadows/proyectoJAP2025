@@ -142,7 +142,7 @@ h1 {
 }
 
 /* 1366x768 - pantalla estándar */
-@media (min-width: 1366px) and (max-width: 768px)  {
+@media (min-width: 321px) and (max-width: 1366px)  {
   .products-container {
     flex-direction: row;
     justify-content:center;
@@ -162,9 +162,15 @@ h1 {
   .product-card p {
     font-size: 1rem;
   }
+
+  #Header-1{
+    top: 0;
+    margin: 0;
+  }
+  
   #Nav-items{
-    gap: 1rem;
-    font-size: 2.5rem;
+    
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     position: relative;
@@ -173,7 +179,10 @@ h1 {
     
     
   }
-
+.fa-bag-shopping{
+  position: relative;
+  left: 10px;
+}
   .login-items {
     display: flex;
     align-items: center;
@@ -184,11 +193,26 @@ h1 {
   }
 
   #nombre_usuario {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin: 0;
+    position: relative;
+    bottom: 8px;
 }
+#Logo{
+  width: 40%;
+  height: auto;
 }
+.input-group{
+  width: 100%;
+  height: 20%;
+  position: relative;
+  bottom: 50px;
+}
+.input-group{
 
+
+}
+}
 
 /* 768x1024 - tablet vertical */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
@@ -247,6 +271,7 @@ h1 {
   }
 #Search-bar {
   width: 80%;
+  height: 30px;
 
 }
   .product-card {
@@ -298,11 +323,8 @@ h1 {
   top: 3px;
 }
 
-#Logo{
-  position: relative;
-  left: 10px;
-  top: 15px;
-  width: 75px;
+#Logo {
+  top: 10px;
 }
 
 }
