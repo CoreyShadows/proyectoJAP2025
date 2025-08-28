@@ -142,17 +142,27 @@ h1 {
 }
 
 /* 1366x768 - pantalla estándar */
-@media (min-width: 1366px) and (max-width: 768px) {
+@media (min-width: 1366px) and (max-width: 768px)  {
   .products-container {
-    justify-content: space-evenly;
-    padding: 3rem;
+    flex-direction: row;
+    justify-content:center;
+    gap:1.5rem;
+    padding: 2rem 1rem;
   }
 
   .product-card {
-    max-width: 320px;
+    max-width: 260px;
+    padding: 1rem;
   }
 
-    #Nav-items{
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
+    font-size: 1rem;
+  }
+  #Nav-items{
     gap: 1rem;
     font-size: 2.5rem;
     display: flex;
@@ -178,6 +188,7 @@ h1 {
     margin: 0;
 }
 }
+
 
 /* 768x1024 - tablet vertical */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
