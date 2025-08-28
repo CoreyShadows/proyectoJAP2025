@@ -24,11 +24,7 @@ body {
   padding: 0;
 
 
-<<<<<<< HEAD
   min-height: 100vh;              /* height: 100vh;*/
-=======
-  min-height: 100vh;                      
->>>>>>> 4e83e2a7c6d13bbb504c4244a2f790b82ae33b69
 }
 .header {
 background:var(--color-secundario);
@@ -74,8 +70,9 @@ nav a:hover {
   position: absolute; 
   left: 50%; 
   transform: translateX(-50%);
-  width: 500px;
+  width: 100px;
   margin-top: 0;
+  z-index: 1000;
 }
 
 .buscar input {
@@ -197,14 +194,8 @@ nav a:hover {
 }
 
 .footer{
-<<<<<<< HEAD
-   width: 100%; /* aseguro que ocupa todo el ancho */
-  padding: 20px 0; /* agrego un poco de espacio arriba y abajo */
-=======
-
    width: 100%; 
-  padding: 20px 0; 
->>>>>>> 4e83e2a7c6d13bbb504c4244a2f790b82ae33b69
+  padding: 20px 0;
   background: linear-gradient(135deg, #0b1e3f 0%, #1e2767 60%, #081a36 100%);
   color: #F5F5F5;
   
@@ -243,3 +234,63 @@ html {
 
 
 
+
+@media (max-width: 568px) {
+  .header {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center;
+    height: auto;
+    padding: 10px 15px;
+    gap: 0;
+  }
+
+  
+  #logo {
+    width: 175px;
+    height: auto;
+  }
+
+  
+  .fa-user, .fa-bag-shopping {
+    font-size: 1.5rem;
+    padding: 5px;
+  }
+
+
+  .buscar {
+    display: none; 
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .buscar {
+    width: 30%;
+  }
+
+  nav {
+    gap: 20px;
+  }
+
+  .imgproducto {
+    width: 250px;
+    height: auto;
+  }
+  #logo {
+    width: 80%;
+;
+  }
+}
+
+/* ✅ Desktop estándar: min 1366px */
+@media (min-width: 1366px) {
+  .buscar {
+    width: 500px;
+  }
+
+  .imgproducto {
+    width: 300px;
+    height: 200px;
+  }
+}
