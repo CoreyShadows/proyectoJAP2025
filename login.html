@@ -24,12 +24,14 @@
       <img src="img/logo-jap.png" alt="Logo" class="img-fluid" style="max-height: 60px;" />
     </a>
     <div class="d-flex gap-3 align-items-center" id="Nav-items">
-      <p id="nombre_usuario"></p>
-      <a href="login.html" class="text-white"><i class="fa-solid fa-user fa-lg"></i></a>
+      <div class="login-items">
+        <a href="login.html" class="text-white"><i class="fa-solid fa-user fa-lg"></i></a>
+        <p id="nombre_usuario"></p>
+      </div>
       <a href="products.html" class="text-white"><i class="fa-solid fa-bag-shopping fa-lg"></i></a>
     </div>
   </div>
-  </header> 
+</header>
   <!-- Login Form -->
   <main class="container">
     <div class="row w-100">
@@ -61,8 +63,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="text-center py-3 bg-light" id="footer">
-    <p class="mb-0">© 2025 Jóvenes a Programar. Todos los derechos reservados.</p>
+  <footer class="text-center py-4 bg-dark text-light">
+    <p><a href="#Header" class="text-light text-decoration-none">Volver arriba</a></p>
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank" class="text-info">Jóvenes a Programar</a></p>
   </footer>
 
   <!-- JS opcional -->
