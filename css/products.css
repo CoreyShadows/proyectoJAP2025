@@ -166,6 +166,7 @@ h1 {
   #Header-1{
     top: 0;
     margin: 0;
+    
   }
   
   #Nav-items{
@@ -203,14 +204,13 @@ h1 {
   height: auto;
 }
 .input-group{
-  width: 100%;
-  height: 20%;
+  
   position: relative;
   bottom: 50px;
 }
-.input-group{
-
-
+#Search-bar input {
+  line-height: 0rem;
+    box-sizing: border-box;
 }
 }
 
