@@ -6,7 +6,6 @@
   --links: #265ebd;
 }
 
-
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: var(--color-primario);
@@ -14,24 +13,46 @@ body {
   min-height: 100vh;
   margin: 0;
 }
-#Header-1{
-  background-color: var(--color-secundario);
- 
 
-  
+/* Header */
+header {
+  z-index: 10;
 }
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; /* permite que los elementos se envuelvan en pantallas estrechas */
+  gap: 0.5rem;
+}
+
+#Search-bar {
+  display: flex;
+  flex: 1 1 auto; /* crece y se encoge según el espacio */
+  min-width: 120px;
+  max-width: 400px;
+  margin: 0 0.5rem;
+}
+
+#Search-bar .input-group {
+  width: 100%;
+}
+
+.login-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #nombre_usuario {
   color: white;
   margin: 0;
 }
 
-#Search-bar {
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  z-index: 1;
+a.text-white {
+  font-size: 1rem;
 }
 
 /* Tarjetas de producto */
@@ -109,10 +130,6 @@ h1 {
     font-size: 1.5rem;
   }
 
-  header {
-    gap: 0.5rem;
-  }
-
   .input-group {
     width: 100% !important;
   }
@@ -163,56 +180,10 @@ h1 {
     font-size: 1rem;
   }
 
-  #Header-1{
-    
-    
-  }
-  
-  #Nav-items{
-    
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5px;
-    right: 20px;
-    
-    
-  }
-.fa-bag-shopping{
-  position: relative;
-  left: 10px;
-}
-  .login-items {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    top: 15px;
-    
-  }
-
-  #nombre_usuario {
-    font-size: 1rem;
-    margin: 0;
-    position: relative;
-    bottom: 8px;
-}
-#Logo{
-  width: 40%;
-  height: auto;
-}
-.input-group{
-  
-  position: relative;
-  bottom: 50px;
-  ;
-  
-}
-#Search-bar input {
-  line-height: 0rem;
+  #Search-bar input {
+    line-height: 0rem;
     box-sizing: border-box;
-}
+  }
 }
 
 /* 768x1024 - tablet vertical */
@@ -236,32 +207,13 @@ h1 {
   .product-card p {
     font-size: 1rem;
   }
-  #Nav-items{
-    gap: 1rem;
-    font-size: 2.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    top: 5px;
-    right: 20px;
-    
-    
-  }
 
-  .login-items {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    top: 15px;
-    
+  #Search-bar {
+    max-width: 250px;
+    margin: 0 auto;
   }
+}
 
-  #nombre_usuario {
-    font-size: 1.2rem;
-    margin: 0;
-}
-}
 /* 320x568 - smartphone pequeño */
 @media (max-width: 320px) and (max-height: 568px) {
   .products-container {
@@ -270,11 +222,7 @@ h1 {
     padding: 1rem;
     gap: 1rem;
   }
-#Search-bar {
-  width: 80%;
-  height: 30px;
 
-}
   .product-card {
     max-width: 100%;
     padding: 1rem;
@@ -293,39 +241,17 @@ h1 {
     width: 100%;
     height: auto;
   }
-#Nav-items{
-    
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    position: relative;
-    right: 5px;
-    
-    
+
+  #Search-bar {
+    width: 80%;
+    height: 30px;
+    margin: 0 auto;
   }
+}
 
-  .login-items {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    top: 15px;
-    left: 20px;
-    
+
+@media (max-width: 700px) {
+  #Search-bar {
+    width: 1rem;
   }
-
-  #nombre_usuario {
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.fa-bag-shopping{
-  position: relative;
-  top: 3px;
-}
-
-#Logo {
-  top: 10px;
-}
-
 }
