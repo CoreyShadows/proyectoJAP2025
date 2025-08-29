@@ -246,9 +246,210 @@ html {
     gap: 0;
   }
 
+<<<<<<< Updated upstream
   
   #logo {
     width: 175px;
+=======
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  header {
+    gap: 0.5rem;
+  }
+
+  .input-group {
+    width: 100% !important;
+  }
+}
+
+/* Estilo base para grilla de productos */
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.product-card {
+  width: 100%;
+  max-width: 300px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+/* 1366x768 - pantalla estándar */
+@media (min-width: 321px) and (max-width: 1366px)  {
+  .products-container {
+    flex-direction: row;
+    justify-content:center;
+    gap:1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .product-card {
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
+    font-size: 1rem;
+  }
+
+  #Header-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  #Nav-items{
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    position: relative;;
+    right: 20px;
+  }
+.fa-bag-shopping{
+  position: relative;
+  left: 10px;
+}
+  .login-items {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 8px
+    
+  }
+
+  #nombre_usuario {
+    font-size: 0.6rem;
+    margin: 0;
+    position: relative;
+    bottom: 5px;
+}
+#Logo{
+  width: 50%;
+  height: auto;
+}
+.input-group{
+  
+  position: relative;
+  bottom: 50px;
+  display: flex;
+}
+#Search-bar{
+  width: 45%;
+  height: 30px;
+  position: relative;
+  top: 12px;
+  background-color: #F5F5F5;
+}
+#Search-bar .fa-magnifying-glass{
+  font-size: 10px!important;
+}
+#Search-bar .btn-outline-light {
+  font-size: 1px!important; /* el alto que quieras */
+}
+#Search-bar .form-control {
+  height: 25px !important; /* el alto que quieras */
+}
+#Search-bar input {
+  line-height: 0rem;
+    box-sizing: border-box;
+}
+}
+
+/* 768x1024 - tablet vertical */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .products-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .product-card {
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
+    font-size: 1rem;
+  }
+  #Nav-items{
+    gap: 1rem;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 5px;
+    right: 20px;
+    
+    
+  }
+
+  .login-items {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 15px;
+    
+  }
+
+  #nombre_usuario {
+    font-size: 1.2rem;
+    margin: 0;
+}
+}
+/* 320x568 - smartphone pequeño */
+@media (max-width: 320px) and (max-height: 568px) {
+  .products-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+#Search-bar {
+  width: 80%;
+  height: 30px;
+
+}
+  .product-card {
+    max-width: 100%;
+    padding: 1rem;
+    box-shadow: none;
+  }
+
+  .product-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+  }
+
+  .product-card img {
+    width: 100%;
+>>>>>>> Stashed changes
     height: auto;
   }
 
