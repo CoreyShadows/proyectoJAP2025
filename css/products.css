@@ -184,6 +184,44 @@ h1 {
     line-height: 0rem;
     box-sizing: border-box;
   }
+ .fa-user{
+    font-size: 1.5rem;
+    
+  }
+  .login-items {
+   font-size: 0.6rem;
+
+
+  }
+  .fa-bag-shopping {
+    font-size: 1.5rem;
+    position: relative;
+    bottom: 8px;
+  }
+
+#Search-bar .form-control {
+  height: 30px !important; /* el alto que quieras */
+}
+#Search-bar .fa-magnifying-glass {
+  height: -10px !important; /* el alto que quieras */
+}
+.input-group btn {
+  height: 20px !important; /* el alto que quieras */
+  position: relative;
+}
+
+  #Logo {
+  height: 50px !important;
+    height: auto;
+  }
+  #logo img {
+    max-height: 50px !important;
+    height: auto;
+  }
+  #logo a {
+    max-height: 10px !important;
+    height: auto;
+  }
 }
 
 /* 768x1024 - tablet vertical */
