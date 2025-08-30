@@ -188,3 +188,42 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+.loader {
+  color: #000000;
+  display: flex;
+  font-size: 48px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+.loader::after {
+  content: '';  
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  right: -5px;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+  position: relative;
+  bottom: 10px;
+  top: 15px;
+}
+
+@keyframes animloader {
+  0% {
+    box-shadow: 10px 0 rgba(255, 255, 255, 0), 20px 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 10px 0 rgb(0, 0, 0), 20px 0 rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 10px 0 rgb(0, 0, 0), 20px 0 rgb(0, 0, 0);
+  }
+}
+
+#navbarhome, #main-contenthome, #footerhome {
+  display: none;
+}
