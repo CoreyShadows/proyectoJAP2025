@@ -21,3 +21,14 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loaderhome");
+  const nav = document.getElementById("navbarhome");
+  const main = document.getElementById("main-contenthome");
+  const footer = document.getElementById("footerhome");
+
+  loader.style.display = "none"; 
+  nav.style.display = "block";
+  main.style.display = "block";
+  footer.style.display = "block";
+});
