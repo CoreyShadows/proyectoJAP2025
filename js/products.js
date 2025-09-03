@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🚀 Recuperar el ID de la categoría guardado en localStorage
+
   const catID = localStorage.getItem("catID");
 
   if (!catID) {
@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🚀 Usar el catID en la URL del fetch
   const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
   fetch(url)
