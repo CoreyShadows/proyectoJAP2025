@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const parrafo_nombre = document.getElementById("nombre_usuario")
+  const parrafo_nombre = document.getElementById("nombre_usuario");
   const usuario = localStorage.getItem("usuarioLogueado");
   if (!usuario) {
     window.location.href = "login.html";
@@ -16,7 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  fetch("https://japceibal.github.io/emercado-api/cats_products/101.json")
+  // 🚀 Recuperar el ID de la categoría guardado en localStorage
+  const catID = localStorage.getItem("catID");
+
+  if (!catID) {
+    spinner.style.display = "none";
+    container.innerHTML = "<p class='text-danger'>No se seleccionó ninguna categoría.</p>";
+    return;
+  }
+
+  // 🚀 Usar el catID en la URL del fetch
+  const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+
+  fetch(url)
     .then(response => {
       if (!response.ok) throw new Error("Error al cargar el JSON");
       return response.json();
