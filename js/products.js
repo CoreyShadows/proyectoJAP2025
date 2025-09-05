@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+// Se obtiene el ID de categoría desde localStorage, guardado previamente al hacer clic en una categoría.
+// Esto permite que products.html cargue dinámicamente los productos correspondientes.
 
   const catID = localStorage.getItem("catID");
 
