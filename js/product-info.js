@@ -40,9 +40,9 @@ fetch(URL)
     
     container.innerHTML = `
   <nav>
-    <a href="categories.html">Volver al listado</a> | 
-    <a href="products.html">${product.category}</a> > 
-    <a href="#">${product.name}</a>
+    <a href="categories.html" class="nav-links">Volver al listado</a> | 
+    <a href="products.html" class="nav-links">${product.category}</a> > 
+    <a href="#" class="nav-links">${product.name}</a>
   </nav>
 
   <div class="row mt-3">
