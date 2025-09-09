@@ -55,6 +55,10 @@ a.text-white {
   font-size: 1rem;
 }
 
+.nav-links {
+  text-decoration: none;
+}
+
 /* Tarjetas de producto */
 .card {
   border-radius: 10px;
