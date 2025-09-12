@@ -24,13 +24,13 @@ header {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  flex-wrap: wrap; /* permite que los elementos se envuelvan en pantallas estrechas */
+  flex-wrap: wrap; 
   gap: 0.5rem;
 }
 
 #Search-bar {
   display: flex;
-  flex: 1 1 auto; /* crece y se encoge según el espacio */
+  flex: 1 1 auto; 
   min-width: 120px;
   max-width: 400px;
   margin: 0 0.5rem;
@@ -55,7 +55,7 @@ a.text-white {
   font-size: 1rem;
 }
 
-/* Tarjetas de producto */
+
 .card {
   border-radius: 10px;
   transition: transform 0.3s ease;
@@ -70,7 +70,7 @@ a.text-white {
   height: 200px;
 }
 
-/* Botón */
+
 .btn-primary {
   background-color: var(--color-secundario);
   border: none;
