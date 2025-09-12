@@ -16,9 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-// Se obtiene el ID de categoría desde localStorage, guardado previamente al hacer clic en una categoría.
-// Esto permite que products.html cargue dinámicamente los productos correspondientes.
-
   const catID = localStorage.getItem("catID");
 
   if (!catID) {
@@ -29,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
 
+  let productsArray = [];
+
   fetch(url)
     .then(response => {
       if (!response.ok) throw new Error("Error al cargar el JSON");
@@ -36,28 +35,21 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     .then(data => {
       spinner.style.display = "none"; // Ocultar spinner
+      productsArray = data.products;
 
-      container.innerHTML = "";
+      showProductsList(productsArray); // render inicial
 
-      data.products.forEach(product => {
-        const col = document.createElement("div");
-        col.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+      // Configurar búsqueda
+      const searchInput = document.querySelector('#Search-bar input[type="text"]');
+      searchInput.addEventListener('input', function () {
+        const searchText = this.value.toLowerCase();
 
-        col.innerHTML = `
-          <div onclick="setProductID(${product.id})" class="card h-100 shadow-sm">
-            <img src="${product.image}" class="card-img-top" alt="${product.name}">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">${product.name}</h5>
-              <p class="card-text">${product.description}</p>
-              <div class="mt-auto d-flex justify-content-between align-items-center">
-                <span class="fw-bold">${product.cost} ${product.currency}</span>
-                <button class="btn btn-primary">Agregar</button>
-              </div>
-            </div>
-          </div>
-        `;
+        const filtered = productsArray.filter(product =>
+          product.name.toLowerCase().includes(searchText) ||
+          product.description.toLowerCase().includes(searchText)
+        );
 
-        container.appendChild(col);
+        showProductsList(filtered);
       });
     })
     .catch(error => {
@@ -69,44 +61,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setProductID(productid) {
   localStorage.setItem("productID", productid);
-  window.location = "product-info.html"
+  window.location = "product-info.html";
 }
 
-
-
-
-
-let productsArray = [];
-
 function showProductsList(products) {
-  const container = document.querySelector('.Main-1');
-  container.innerHTML = '';
+  const container = document.querySelector(".row.Main-1");
+  container.innerHTML = ""; // limpiar resultados previos
+
   products.forEach(product => {
-    container.innerHTML += `
-      <div class="card">
+    const col = document.createElement("div");
+    col.className = "col-12 col-sm-6 col-md-4 col-lg-3";
+
+    col.innerHTML = `
+      <div onclick="setProductID(${product.id})" class="card h-100 shadow-sm">
         <img src="${product.image}" class="card-img-top" alt="${product.name}">
-        <div class="card-body">
+        <div class="card-body d-flex flex-column">
           <h5 class="card-title">${product.name}</h5>
           <p class="card-text">${product.description}</p>
-          <div>${product.cost} ${product.currency}</div>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <span class="fw-bold">${product.cost} ${product.currency}</span>
+            <button class="btn btn-primary">Agregar</button>
+          </div>
         </div>
       </div>
     `;
+
+    container.appendChild(col);
   });
 }
-fetch(url)
-  .then(res => res.json())
-  .then(data => {
-    productsArray = data.products; 
-    showProductsList(productsArray);
-  });
-
-const searchInput = document.querySelector('#Search-bar input[type="text"]');
-searchInput.addEventListener('input', function () {
-  const searchText = this.value.toLowerCase();
-  const filtered = productsArray.filter(product =>
-    product.name.toLowerCase().includes(searchText) ||
-    product.description.toLowerCase().includes(searchText)
-  );
-  showProductsList(filtered);
-});
