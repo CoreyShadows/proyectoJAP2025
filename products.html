@@ -56,6 +56,31 @@
     </div>
   </section>
 
+  <!-- Filtros y orden -->
+  <section class="container mb-4">
+   <div class="d-flex flex-wrap align-items-end gap-3 border p-3 rounded">
+    
+  <!-- Botones de orden -->
+   <div class="btn-group" role="group" aria-label="Ordenar">
+      <button id="sortAsc" class="btn btn-outline-secondary">↑ $</button>
+      <button id="sortDesc" class="btn btn-outline-secondary">↓ $</button>
+      <button id="sortRel" class="btn btn-outline-secondary">↓ Rel.</button>
+   </div>
+
+  <!-- Filtro por precio -->
+    <div class="d-flex flex-column">
+      <label for="minPrice">Precio</label>
+      <div class="d-flex gap-2">
+        <input type="number" id="minPrice" class="form-control" placeholder="mín.">
+        <input type="number" id="maxPrice" class="form-control" placeholder="máx.">
+      </div>
+    </div>
+
+    <button id="filterBtn" class="btn btn-primary">Filtrar</button>
+    <button id="clearBtn" class="btn btn-link">Limpiar</button>
+   </div>
+  </section>
+
   <!-- Productos -->
   <main class="container py-4">
     <div class="row g-4 Main-1">
