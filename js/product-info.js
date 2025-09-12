@@ -42,7 +42,7 @@ fetch(URL)
   <nav>
     <a href="categories.html" class="nav-links">Volver al listado</a> | 
     <a href="products.html" class="nav-links">${product.category}</a> > 
-    <a href="#" class="nav-links">${product.name}</a>
+    <a href="#" class="nav-links .card, .card-title">${product.name}</a>
   </nav>
 
   <div class="row mt-3">
