@@ -34,12 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
-      spinner.style.display = "none"; // Ocultar spinner
+      spinner.style.display = "none"; 
       productsArray = data.products;
 
-      showProductsList(productsArray); // render inicial
+      showProductsList(productsArray);
 
-      // Configurar búsqueda
       const searchInput = document.querySelector('#Search-bar input[type="text"]');
       searchInput.addEventListener('input', function () {
         const searchText = this.value.toLowerCase();
@@ -53,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     })
     .catch(error => {
-      spinner.style.display = "none"; // Ocultar spinner en caso de error
+      spinner.style.display = "none"; 
       console.error("Error:", error);
       container.innerHTML = "<p class='text-danger'>No se pudo cargar la lista de productos.</p>";
     });
