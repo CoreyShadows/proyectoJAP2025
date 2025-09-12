@@ -71,3 +71,42 @@ function setProductID(productid) {
   localStorage.setItem("productID", productid);
   window.location = "product-info.html"
 }
+
+
+
+
+
+let productsArray = [];
+
+function showProductsList(products) {
+  const container = document.querySelector('.Main-1');
+  container.innerHTML = '';
+  products.forEach(product => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${product.image}" class="card-img-top" alt="${product.name}">
+        <div class="card-body">
+          <h5 class="card-title">${product.name}</h5>
+          <p class="card-text">${product.description}</p>
+          <div>${product.cost} ${product.currency}</div>
+        </div>
+      </div>
+    `;
+  });
+}
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    productsArray = data.products; 
+    showProductsList(productsArray);
+  });
+
+const searchInput = document.querySelector('#Search-bar input[type="text"]');
+searchInput.addEventListener('input', function () {
+  const searchText = this.value.toLowerCase();
+  const filtered = productsArray.filter(product =>
+    product.name.toLowerCase().includes(searchText) ||
+    product.description.toLowerCase().includes(searchText)
+  );
+  showProductsList(filtered);
+});
