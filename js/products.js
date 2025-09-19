@@ -67,26 +67,6 @@ function showProductsList(products) {
   const container = document.querySelector(".row.Main-1");
   container.innerHTML = ""; // limpiar resultados previos
 
-  products.forEach(product => {
-    const col = document.createElement("div");
-    col.className = "col-12 col-sm-6 col-md-4 col-lg-3";
-
-    col.innerHTML = `
-      <div onclick="setProductID(${product.id})" class="card h-100 shadow-sm">
-        <img src="${product.image}" class="card-img-top" alt="${product.name}">
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">${product.name}</h5>
-          <p class="card-text">${product.description}</p>
-          <div class="mt-auto d-flex justify-content-between align-items-center">
-            <span class="fw-bold">${product.cost} ${product.currency}</span>
-            <button class="btn btn-primary">Agregar</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    container.appendChild(col);
-  });
 }
 document.addEventListener("DOMContentLoaded", () => {
   const parrafo_nombre = document.getElementById("nombre_usuario");
