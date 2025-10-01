@@ -1,4 +1,3 @@
-// ...existing code...
 document.addEventListener("DOMContentLoaded", () => {
   const nombreUsuario = document.getElementById("nombre_usuario");
   const usuario = localStorage.getItem("usuarioLogueado");
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const productURL = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
   const commentsURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
 
-  // Cargar producto
   fetch(productURL)
     .then(res => res.json())
     .then(product => {
@@ -24,17 +22,15 @@ document.addEventListener("DOMContentLoaded", () => {
       renderRelated(product.relatedProducts);
     });
 
-  // Cargar y renderizar comentarios, luego agregar el formulario interactivo
   fetch(commentsURL)
     .then(res => res.json())
     .then(comments => {
       renderComments(comments);
-      renderCommentForm(); // ahora el formulario se inserta y funciona con commentsSection
+      renderCommentForm();
     })
     .catch(error => {
       console.error("Error al cargar comentarios:", error);
-      // igualmente mostramos el formulario aunque falle la carga
-      renderCommentForm();
+      commentsSection.innerHTML = "<p class='text-danger'>No se pudieron cargar los comentarios.</p>";
     });
 
   function renderProduct(product) {
@@ -100,13 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderComments(comments) {
-    // asegúrate de que exista el contenedor
-    if (!commentsSection) {
-      const c = document.createElement("div");
-      c.id = "comments-section";
-      container.appendChild(c);
-    }
-
     commentsSection.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
     comments.forEach(c => {
       commentsSection.innerHTML += `
@@ -122,25 +111,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Formulario y lógica de estrellas 
   function renderCommentForm() {
-    // crea contenedor si no existe
-    const target = commentsSection || (() => {
-      const el = document.createElement("div");
-      el.id = "comments-section";
-      container.appendChild(el);
-      return el;
-    })();
-
-    target.insertAdjacentHTML("beforeend", `
+    commentsSection.insertAdjacentHTML("beforeend", `
       <div class="mt-4 bg-white p-4 rounded">
         <h5>Agregar una calificación</h5>
         <form id="commentForm">
           <textarea id="commentText" class="form-control mb-2" rows="3" placeholder="Escribí tu comentario" required></textarea>
           <div class="mb-2">
             <label class="form-label">Puntuación</label>
-            <div id="starRating" class="d-flex gap-1 fs-4 text-warning" aria-label="Puntuación">
-              ${[1,2,3,4,5].map(i => `<span class="star" data-score="${i}" tabindex="0" role="button" aria-label="${i} estrellas">☆</span>`).join("")}
+            <div id="starRating" class="d-flex gap-1 fs-4 text-warning">
+              ${[1,2,3,4,5].map(i => `<span class="star" data-score="${i}">☆</span>`).join("")}
             </div>
           </div>
           <button type="submit" class="btn btn-success">Enviar</button>
@@ -149,51 +129,19 @@ document.addEventListener("DOMContentLoaded", () => {
     `);
 
     let selectedScore = 0;
-    const stars = target.querySelectorAll(".star");
-    const starsArray = Array.from(stars);
-
-    function updateStars(score) {
-      starsArray.forEach(s => {
-        s.textContent = parseInt(s.dataset.score) <= score ? "★" : "☆";
-      });
-    }
-
-    starsArray.forEach(star => {
+    const stars = document.querySelectorAll(".star");
+    stars.forEach(star => {
       star.addEventListener("click", () => {
         selectedScore = parseInt(star.dataset.score);
-        updateStars(selectedScore);
-      });
-      star.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
-          e.preventDefault();
-          selectedScore = parseInt(star.dataset.score);
-          updateStars(selectedScore);
-        } else if (e.key === "ArrowLeft") {
-          e.preventDefault();
-          selectedScore = Math.max(1, selectedScore - 1) || 1;
-          updateStars(selectedScore);
-          const prev = starsArray[Math.max(0, selectedScore - 1)];
-          prev.focus();
-        } else if (e.key === "ArrowRight") {
-          e.preventDefault();
-          selectedScore = Math.min(5, (selectedScore || 0) + 1);
-          updateStars(selectedScore);
-          const next = starsArray[selectedScore - 1];
-          if (next) next.focus();
-        }
-      });
-      star.addEventListener("mouseenter", () => {
-        updateStars(parseInt(star.dataset.score));
-      });
-      star.addEventListener("mouseleave", () => {
-        updateStars(selectedScore);
+        stars.forEach(s => {
+          s.textContent = parseInt(s.dataset.score) <= selectedScore ? "★" : "☆";
+        });
       });
     });
 
-    const form = target.querySelector("#commentForm");
-    form.addEventListener("submit", function (e) {
+    document.getElementById("commentForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const text = target.querySelector("#commentText").value.trim();
+      const text = document.getElementById("commentText").value;
       const user = localStorage.getItem("usuarioLogueado") || "Anónimo";
       const date = new Date().toISOString().slice(0, 19).replace("T", " ");
 
@@ -219,17 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${newComment.description}</p>
         </div>
       `;
-      // insertar al inicio de la lista de comentarios
-      const firstChild = target.querySelector("h4");
-      if (firstChild) {
-        firstChild.insertAdjacentHTML("afterend", commentHTML);
-      } else {
-        target.insertAdjacentHTML("afterbegin", commentHTML);
-      }
-
-      form.reset();
+      commentsSection.insertAdjacentHTML("afterbegin", commentHTML);
+      this.reset();
       selectedScore = 0;
-      updateStars(0);
+      stars.forEach(s => s.textContent = "☆");
     });
   }
 });
