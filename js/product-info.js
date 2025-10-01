@@ -1,3 +1,4 @@
+// ...existing code...
 document.addEventListener("DOMContentLoaded", () => {
   const nombreUsuario = document.getElementById("nombre_usuario");
   const usuario = localStorage.getItem("usuarioLogueado");
@@ -23,33 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
       renderRelated(product.relatedProducts);
     });
 
+  // Cargar y renderizar comentarios, luego agregar el formulario interactivo
   fetch(commentsURL)
-  .then(res => res.json())
-  .then(comments => {
-    const commentsContainer = document.createElement("div");
-    commentsContainer.className = "mt-5";
-    commentsContainer.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
-
-    comments.forEach(comment => {
-      commentsContainer.innerHTML += `
-        <div class="border rounded p-3 mb-3 bg-white">
-          <div class="d-flex justify-content-between">
-            <strong>${comment.user}</strong>
-            <span class="text-muted">${comment.dateTime}</span>
-          </div>
-          <div class="text-warning">${"★".repeat(comment.score)}${"☆".repeat(5 - comment.score)}</div>
-          <p>${comment.description}</p>
-        </div>
-      `;
+    .then(res => res.json())
+    .then(comments => {
+      renderComments(comments);
+      renderCommentForm(); // ahora el formulario se inserta y funciona con commentsSection
+    })
+    .catch(error => {
+      console.error("Error al cargar comentarios:", error);
+      // igualmente mostramos el formulario aunque falle la carga
+      renderCommentForm();
     });
-
-    document.getElementById("main").appendChild(commentsContainer);
-  })
-  .catch(error => {
-    console.error("Error al cargar comentarios:", error);
-  });
-
-
 
   function renderProduct(product) {
     container.innerHTML = `
@@ -114,6 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderComments(comments) {
+    // asegúrate de que exista el contenedor
+    if (!commentsSection) {
+      const c = document.createElement("div");
+      c.id = "comments-section";
+      container.appendChild(c);
+    }
+
     commentsSection.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
     comments.forEach(c => {
       commentsSection.innerHTML += `
@@ -126,6 +119,117 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${c.description}</p>
         </div>
       `;
+    });
+  }
+
+  // Formulario y lógica de estrellas 
+  function renderCommentForm() {
+    // crea contenedor si no existe
+    const target = commentsSection || (() => {
+      const el = document.createElement("div");
+      el.id = "comments-section";
+      container.appendChild(el);
+      return el;
+    })();
+
+    target.insertAdjacentHTML("beforeend", `
+      <div class="mt-4 bg-white p-4 rounded">
+        <h5>Agregar una calificación</h5>
+        <form id="commentForm">
+          <textarea id="commentText" class="form-control mb-2" rows="3" placeholder="Escribí tu comentario" required></textarea>
+          <div class="mb-2">
+            <label class="form-label">Puntuación</label>
+            <div id="starRating" class="d-flex gap-1 fs-4 text-warning" aria-label="Puntuación">
+              ${[1,2,3,4,5].map(i => `<span class="star" data-score="${i}" tabindex="0" role="button" aria-label="${i} estrellas">☆</span>`).join("")}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Enviar</button>
+        </form>
+      </div>
+    `);
+
+    let selectedScore = 0;
+    const stars = target.querySelectorAll(".star");
+    const starsArray = Array.from(stars);
+
+    function updateStars(score) {
+      starsArray.forEach(s => {
+        s.textContent = parseInt(s.dataset.score) <= score ? "★" : "☆";
+      });
+    }
+
+    starsArray.forEach(star => {
+      star.addEventListener("click", () => {
+        selectedScore = parseInt(star.dataset.score);
+        updateStars(selectedScore);
+      });
+      star.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+          e.preventDefault();
+          selectedScore = parseInt(star.dataset.score);
+          updateStars(selectedScore);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          selectedScore = Math.max(1, selectedScore - 1) || 1;
+          updateStars(selectedScore);
+          const prev = starsArray[Math.max(0, selectedScore - 1)];
+          prev.focus();
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          selectedScore = Math.min(5, (selectedScore || 0) + 1);
+          updateStars(selectedScore);
+          const next = starsArray[selectedScore - 1];
+          if (next) next.focus();
+        }
+      });
+      star.addEventListener("mouseenter", () => {
+        updateStars(parseInt(star.dataset.score));
+      });
+      star.addEventListener("mouseleave", () => {
+        updateStars(selectedScore);
+      });
+    });
+
+    const form = target.querySelector("#commentForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const text = target.querySelector("#commentText").value.trim();
+      const user = localStorage.getItem("usuarioLogueado") || "Anónimo";
+      const date = new Date().toISOString().slice(0, 19).replace("T", " ");
+
+      if (selectedScore === 0) {
+        alert("Seleccioná una puntuación antes de enviar.");
+        return;
+      }
+
+      const newComment = {
+        user,
+        dateTime: date,
+        description: text,
+        score: selectedScore
+      };
+
+      const commentHTML = `
+        <div class="border rounded p-3 mb-3 bg-white">
+          <div class="d-flex justify-content-between">
+            <strong>${newComment.user}</strong>
+            <span class="text-muted">${newComment.dateTime}</span>
+          </div>
+          <div class="text-warning">${"★".repeat(newComment.score)}${"☆".repeat(5 - newComment.score)}</div>
+          <p>${newComment.description}</p>
+        </div>
+      `;
+      // insertar al inicio de la lista de comentarios
+      const firstChild = target.querySelector("h4");
+      if (firstChild) {
+        firstChild.insertAdjacentHTML("afterend", commentHTML);
+      } else {
+        target.insertAdjacentHTML("afterbegin", commentHTML);
+      }
+
+      form.reset();
+      selectedScore = 0;
+      updateStars(0);
     });
   }
 });
