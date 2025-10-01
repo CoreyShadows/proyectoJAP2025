@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (usuario) nombreUsuario.textContent = usuario;
 
   const container = document.getElementById("main");
-  const commentsSection = document.getElementById("comments-section");
   const productID = localStorage.getItem("productID");
 
   if (!productID) {
@@ -23,34 +22,38 @@ document.addEventListener("DOMContentLoaded", () => {
       renderRelated(product.relatedProducts);
     });
 
+  // Cargar comentarios
   fetch(commentsURL)
-  .then(res => res.json())
-  .then(comments => {
-    const commentsContainer = document.createElement("div");
-    commentsContainer.className = "mt-5";
-    commentsContainer.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
+    .then(res => res.json())
+    .then(comments => {
+      const commentsContainer = document.createElement("div");
+      commentsContainer.id = "comments-section";
+      commentsContainer.className = "mt-5";
+      commentsContainer.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
 
-    comments.forEach(comment => {
-      commentsContainer.innerHTML += `
-        <div class="border rounded p-3 mb-3 bg-white">
-          <div class="d-flex justify-content-between">
-            <strong>${comment.user}</strong>
-            <span class="text-muted">${comment.dateTime}</span>
+      comments.forEach(comment => {
+        commentsContainer.innerHTML += `
+          <div class="border rounded p-3 mb-3 bg-white">
+            <div class="d-flex justify-content-between">
+              <strong>${comment.user}</strong>
+              <span class="text-muted">${comment.dateTime}</span>
+            </div>
+            <div class="text-warning">${"★".repeat(comment.score)}${"☆".repeat(5 - comment.score)}</div>
+            <p>${comment.description}</p>
           </div>
-          <div class="text-warning">${"★".repeat(comment.score)}${"☆".repeat(5 - comment.score)}</div>
-          <p>${comment.description}</p>
-        </div>
-      `;
+        `;
+      });
+
+      document.getElementById("main").appendChild(commentsContainer);
+
+      // 👉 Agregar formulario después de comentarios
+      addReviewForm(commentsContainer);
+    })
+    .catch(error => {
+      console.error("Error al cargar comentarios:", error);
     });
 
-    document.getElementById("main").appendChild(commentsContainer);
-  })
-  .catch(error => {
-    console.error("Error al cargar comentarios:", error);
-  });
-
-
-
+  // Render de producto
   function renderProduct(product) {
     container.innerHTML = `
       <nav>
@@ -93,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Render productos relacionados
   function renderRelated(related) {
     container.insertAdjacentHTML("beforeend", `
       <div class="mt-5">
@@ -113,23 +117,61 @@ document.addEventListener("DOMContentLoaded", () => {
     `);
   }
 
-  function renderComments(comments) {
-    commentsSection.innerHTML = `<h4>Calificaciones de usuarios</h4>`;
-    comments.forEach(c => {
-      commentsSection.innerHTML += `
-        <div class="border rounded p-3 mb-3 bg-white">
-          <div class="d-flex justify-content-between">
-            <strong>${c.user}</strong>
-            <span class="text-muted">${c.dateTime}</span>
-          </div>
-          <div class="text-warning">${"★".repeat(c.score)}${"☆".repeat(5 - c.score)}</div>
-          <p>${c.description}</p>
+  // 👉 Función para agregar formulario de reseña
+  function addReviewForm(parent) {
+    const formSection = document.createElement("section");
+    formSection.className = "mt-4";
+    formSection.innerHTML = `
+      <h4>Deja tu calificación</h4>
+      <form id="review-form">
+        <div class="mb-3">
+          <label for="rating" class="form-label">Calificación:</label>
+          <select id="rating" class="form-select">
+            <option value="1">1 estrella</option>
+            <option value="2">2 estrellas</option>
+            <option value="3">3 estrellas</option>
+            <option value="4">4 estrellas</option>
+            <option value="5">5 estrellas</option>
+          </select>
         </div>
+        <div class="mb-3">
+          <label for="comment" class="form-label">Comentario:</label>
+          <textarea id="comment" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    `;
+
+    parent.insertAdjacentElement("afterend", formSection);
+
+    // Lógica del desafío: agregar reseña al listado
+    const form = formSection.querySelector("#review-form");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const rating = parseInt(document.getElementById("rating").value);
+      const comment = document.getElementById("comment").value;
+      const now = new Date().toISOString().slice(0,16).replace("T"," ");
+      const user = localStorage.getItem("usuarioLogueado") || "Usuario demo";
+
+      const newComment = document.createElement("div");
+      newComment.className = "border rounded p-3 mb-3 bg-white";
+      newComment.innerHTML = `
+        <div class="d-flex justify-content-between">
+          <strong>${user}</strong>
+          <span class="text-muted">${now}</span>
+        </div>
+        <div class="text-warning">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</div>
+        <p>${comment}</p>
       `;
+
+      parent.appendChild(newComment);
+      form.reset();
     });
   }
 });
 
+// Cambiar producto desde relacionados
 function setProductID(productid) {
   localStorage.setItem("productID", productid);
   window.location = "product-info.html";
