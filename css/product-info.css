@@ -537,7 +537,7 @@ h1 {
 
 /* Opcional: variantes de color */
 .pushup.success {
-  background: #198754; /* verde Bootstrap */
+  background: var(--color-secundario); /* verde Bootstrap */
 }
 .pushup.error {
   background: #dc3545; /* rojo */
