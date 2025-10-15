@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
       this.reset();
       selectedScore = 0;
       stars.forEach(s => s.textContent = "☆");
-
+      showPushUp("Comentario enviado con éxito ✅", "success");
     });
   }
 });
@@ -179,3 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
 function setProductID(productid) {
   localStorage.setItem("productID", productid);
   window.location = "product-info.html";}
+
+  function showPushUp(message, type = "success") {
+  const push = document.createElement("div");
+  push.className = `pushup ${type}`;
+  push.textContent = message;
+  document.body.appendChild(push);
+
+  // Mostrar
+  setTimeout(() => push.classList.add("show"), 100);
+
+  // Ocultar después de 3 segundos
+  setTimeout(() => {
+    push.classList.remove("show");
+    setTimeout(() => push.remove(), 400);
+  }, 3000);
+}
