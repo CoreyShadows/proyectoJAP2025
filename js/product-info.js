@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
       parent.appendChild(newComment);
       form.reset();
 
-        // 🔔 Mostrar push up (toast)
+        // Mostrar push up (toast)
   let toast = document.getElementById("toast");
   if (!toast) {
     toast = document.createElement("div");
