@@ -171,6 +171,51 @@ document.addEventListener("DOMContentLoaded", () => {
       this.reset();
       selectedScore = 0;
       stars.forEach(s => s.textContent = "☆");
+      parent.appendChild(newComment);
+      form.reset();
+
+        // 🔔 Mostrar push up (toast)
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    toast.textContent = "¡Comentario enviado con éxito!";
+    document.body.appendChild(toast);
+
+    // Estilos del push up
+    const style = document.createElement("style");
+    style.textContent = `
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #ff6600;
+        color: white;
+        text-align: center;
+        border-radius: 10px;
+        padding: 16px;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.5s, bottom 0.5s;
+        font-weight: bold;
+      }
+      .toast.show {
+        visibility: visible;
+        opacity: 1;
+        bottom: 50px;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  // Mostrar el mensaje
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 3000);
+
     });
   }
 });
