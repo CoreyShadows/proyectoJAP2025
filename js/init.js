@@ -39,3 +39,43 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+// --- Menú del usuario ---
+document.addEventListener("DOMContentLoaded", () => {
+  // Verificar si hay un usuario guardado
+  const userEmail = localStorage.getItem("user");
+
+  // Si no hay usuario logueado, redirigir al login
+  if (!userEmail && !window.location.href.includes("login.html")) {
+    window.location = "login.html";
+  }
+
+  // Insertar el menú del usuario en la barra de navegación
+  const nav = document.querySelector(".navbar-nav");
+  if (nav && userEmail) {
+    const userMenu = document.createElement("li");
+    userMenu.classList.add("nav-item", "dropdown");
+
+    userMenu.innerHTML = `
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+         data-bs-toggle="dropdown" aria-expanded="false">
+         ${userEmail}
+      </a>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#" id="logout">Cerrar sesión</a></li>
+      </ul>
+    `;
+    nav.appendChild(userMenu);
+  }
+
+  // Función de logout
+  const logoutBtn = document.getElementById("logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location = "login.html";
+    });
+  }
+});

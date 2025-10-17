@@ -1,8 +1,49 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const usuario = localStorage.getItem("usuarioLogueado");
+document.addEventListener("DOMContentLoaded", () => {
+  const emailField = document.getElementById("email");
+  const nameField = document.getElementById("name");
+  const lastnameField = document.getElementById("lastname");
+  const phoneField = document.getElementById("phone");
+  const previewImage = document.getElementById("previewImage");
+  const imageInput = document.getElementById("profileImage");
 
-    if (!usuario) {
-        // No hay sesión → al login
-        window.location.href = "login.html";
+  const usuario = localStorage.getItem("usuarioLogueado");
+
+  // Si no hay usuario logueado → redirige al login
+  if (!usuario) {
+    window.location.href = "login.html";
+  } else {
+    emailField.value = usuario;
+  }
+
+  // Cargar datos guardados
+  const datosGuardados = JSON.parse(localStorage.getItem("perfilUsuario")) || {};
+  if (datosGuardados.name) nameField.value = datosGuardados.name;
+  if (datosGuardados.lastname) lastnameField.value = datosGuardados.lastname;
+  if (datosGuardados.phone) phoneField.value = datosGuardados.phone;
+
+  // Guardar datos del perfil
+  document.getElementById("profile-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const datos = {
+      name: nameField.value,
+      lastname: lastnameField.value,
+      phone: phoneField.value,
+    };
+
+    localStorage.setItem("perfilUsuario", JSON.stringify(datos));
+    alert("Perfil actualizado correctamente ✅");
+  });
+
+  // Previsualizar imagen de perfil
+  imageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        previewImage.src = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
+  });
 });
