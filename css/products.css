@@ -440,3 +440,32 @@ h1 {
     width: 1rem;
   }
 }
+#theme-switch{
+  height: 1.1rem;
+  width: 1.1rem;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
+  background-color: var(--color-secundario);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#theme-switch  svg{
+  fill:var(--color-gris);
+
+}
+
+#theme-switch svg:first-child{
+  display: none;
+}
+
+.darkmode #theme-switch svg:last-child{
+  display: none;
+}
+
+.darkmode #theme-switch svg:first-child{
+  display: block;
+}
