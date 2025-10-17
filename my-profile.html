@@ -12,7 +12,6 @@
       font-family: 'Raleway', sans-serif;
     }
 
-    /* HEADER */
     header {
       background-color: #040914;
       color: white;
@@ -25,9 +24,7 @@
       gap: 15px;
     }
 
-    header img {
-      height: 50px;
-    }
+    header img { height: 50px; }
 
     .search-bar input {
       border-radius: 20px;
@@ -106,18 +103,15 @@
 <body>
 
   <header>
-    <!--  Logo -->
     <div class="d-flex align-items-center">
       <img src="img/logo-jap.png" alt="Logo JAP">
     </div>
 
-    <!--  Barra de búsqueda -->
     <form class="d-flex search-bar" role="search" onsubmit="buscar(event)">
       <input type="search" id="busqueda" placeholder="Buscar..." aria-label="Buscar">
       <button type="submit">🔍</button>
     </form>
 
-    <!--  Usuario -->
     <div class="d-flex align-items-center">
       <span id="userName" class="me-2 fw-bold">Usuario</span>
       <img src="img/avatar.png" alt="Avatar" class="rounded-circle" width="40">
@@ -162,8 +156,59 @@
   </main>
 
   <script src="js/bootstrap.bundle.min.js"></script>
+
   <script>
-  // ✅ Función de búsqueda
+  document.addEventListener("DOMContentLoaded", () => {
+    const emailField = document.getElementById("email");
+    const nameField = document.getElementById("name");
+    const lastnameField = document.getElementById("lastname");
+    const phoneField = document.getElementById("phone");
+    const previewImage = document.getElementById("previewImage");
+    const imageInput = document.getElementById("profileImage");
+    const form = document.getElementById("profile-form");
+
+    // Obtener usuario logueado
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (!usuario) {
+      window.location.href = "login.html";
+      return;
+    } else {
+      emailField.value = usuario;
+      document.getElementById("userName").textContent = usuario;
+    }
+
+    // Cargar datos guardados
+    const datosGuardados = JSON.parse(localStorage.getItem("perfilUsuario")) || {};
+    if (datosGuardados.name) nameField.value = datosGuardados.name;
+    if (datosGuardados.lastname) lastnameField.value = datosGuardados.lastname;
+    if (datosGuardados.phone) phoneField.value = datosGuardados.phone;
+
+    // Guardar datos del perfil
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const datos = {
+        name: nameField.value,
+        lastname: lastnameField.value,
+        phone: phoneField.value
+      };
+      localStorage.setItem("perfilUsuario", JSON.stringify(datos));
+      alert("Perfil actualizado correctamente ✅");
+    });
+
+    // Previsualizar imagen
+    imageInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = () => {
+          previewImage.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+
+  // Función de búsqueda
   function buscar(e) {
     e.preventDefault();
     const valor = document.getElementById('busqueda').value.trim();
@@ -171,34 +216,7 @@
       alert('Buscando: ' + valor);
     }
   }
-
-  // ✅ Previsualizar imagen de perfil
-  document.addEventListener("DOMContentLoaded", () => {
-    const inputImagen = document.getElementById("profileImage");
-    const preview = document.getElementById("previewImage");
-
-    inputImagen.addEventListener("change", () => {
-      const file = inputImagen.files[0];
-      if (file) {
-        const lector = new FileReader();
-        lector.onload = (e) => {
-          preview.src = e.target.result;
-        };
-        lector.readAsDataURL(file);
-      }
-    });
-  });
-</script>
-
-  <script>
-    function buscar(e) {
-      e.preventDefault();
-      const valor = document.getElementById('busqueda').value.trim();
-      if (valor) {
-        alert('Buscando: ' + valor);
-       
-      }
-    }
   </script>
 </body>
 </html>
+
