@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("user");
+      localStorage.removeItem("usuarioLogueado");
       window.location = "login.html";
     });
   }

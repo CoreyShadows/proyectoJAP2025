@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const parrafo_nombre = document.getElementById("nombre_usuario")
     const usuario = localStorage.getItem("usuarioLogueado");
     if (!usuario) {
         window.location.href = "login.html";
     } else {
-        parrafo_nombre.innerHTML = usuario;
     }
 });
 document.addEventListener("DOMContentLoaded", function(){
