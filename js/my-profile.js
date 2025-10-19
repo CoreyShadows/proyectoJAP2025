@@ -21,6 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (datosGuardados.lastname) lastnameField.value = datosGuardados.lastname;
   if (datosGuardados.phone) phoneField.value = datosGuardados.phone;
 
+  // Cargar imagen guardada (si existe)
+  const imagenGuardada = localStorage.getItem("imagenPerfil");
+  if (imagenGuardada) {
+    previewImage.src = imagenGuardada;
+  }
+
   // Guardar datos del perfil
   document.getElementById("profile-form").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -42,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = () => {
         previewImage.src = reader.result;
+        localStorage.setItem("imagenPerfil", reader.result); // Guardar imagen en localStorage
       };
       reader.readAsDataURL(file);
     }

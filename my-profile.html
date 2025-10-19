@@ -195,13 +195,20 @@
       alert("Perfil actualizado correctamente ✅");
     });
 
-    // Previsualizar imagen
+    // Cargar imagen guardada (si existe)
+    const imagenGuardada = localStorage.getItem("imagenPerfil");
+    if (imagenGuardada) {
+      previewImage.src = imagenGuardada;
+    }
+
+    // Previsualizar imagen y guardarla en localStorage
     imageInput.addEventListener("change", (e) => {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
         reader.onload = () => {
           previewImage.src = reader.result;
+          localStorage.setItem("imagenPerfil", reader.result); // Guardar imagen en localStorage
         };
         reader.readAsDataURL(file);
       }
