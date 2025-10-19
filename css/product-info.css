@@ -5,8 +5,9 @@
   --color-gris: #F5F5F5;
   --links: #265ebd;
 }
-.darkmode {
-  --color-primario:  #060f1f;
+
+:root.darkmode {
+  --color-primario:  #08090a;
   --color-secundario: #FFFFFF;
   --Texto: #FFFFFF;
   --color-gris: #F5F5F5;
@@ -158,15 +159,15 @@ h1 {
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
-}
-
 .product-card {
   width: 100%;
   max-width: 300px;
   padding: 1rem;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--color-primario);
+  transition: transform 0.3s ease;
+}
   transition: transform 0.3s ease;
 }
 
@@ -552,32 +553,65 @@ h1 {
 .pushup.info {
   background: var(--links); /* azul */
 }
+
 #theme-switch{
   height: 1.1rem;
   width: 1.1rem;
   padding: 0;
   margin: 0;
   border-radius: 50%;
-  background-color: var(--color-secundario);
+  background-color: var(--color-primario); 
+  border: 1px solid var(--color-secundario); 
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin-left: auto;
+  float: right;
+  box-sizing: border-box;
 }
 
-#theme-switch  svg{
-  fill:var(--color-gris);
-
+#theme-switch svg{
+  transition: fill 0.2s ease, opacity 0.2s ease;
+  fill: var(--Texto);
+  width: 1.1rem;
+  height: 1.1rem;
 }
 
 #theme-switch svg:first-child{
   display: none;
 }
-
 .darkmode #theme-switch svg:last-child{
   display: none;
 }
 
 .darkmode #theme-switch svg:first-child{
   display: block;
+}
+
+body.darkmode,
+.darkmode body{
+  background-color: var(--color-secundario) !important;
+  color: var(--color-primario) !important;
+}
+
+.darkmode a,
+.darkmode h1,
+.darkmode h2,
+.darkmode p,
+.darkmode div
+{
+  background-color: var(--color-secundario) !important;
+  color: var(--color-primario) !important;
+}
+
+.darkmode header,
+.darkmode footer{
+  background-color: var(--color-secundario) !important;
+  color: var(--color-primario) !important;
+  box-shadow: 1px 1px 1px 1px #FFFFFF;
+
+}
+
+.darkmode .me-2 {
+  background-color:  #265ebd;
 }
