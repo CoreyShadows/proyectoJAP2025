@@ -54,3 +54,39 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (usuario) {
+        parrafo_nombre.innerHTML = usuario;
+    }
+});
+
+let darkmode = localStorage.getItem("darkmode");
+const themeSwitch = document.getElementById("theme-switch");
+
+
+const enableDarkMode = () => {
+    document.body.classList.add("darkmode");
+    localStorage.setItem("darkmode", "active");
+    darkmode = "active";
+}
+
+const disableDarkMode = () => {
+    document.body.classList.remove("darkmode");
+    localStorage.setItem("darkmode", "inactive");
+    darkmode = "inactive";
+}
+
+if (darkmode === "active") {
+    enableDarkMode();
+}
+
+if (themeSwitch) {
+    themeSwitch.addEventListener("click", () => {
+        darkmode = localStorage.getItem("darkmode");
+        darkmode !== "active" ? enableDarkMode() : disableDarkMode();
+    });
+}
