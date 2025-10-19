@@ -43,7 +43,7 @@ let getJSONData = function(url){
 // --- Menú del usuario ---
 document.addEventListener("DOMContentLoaded", () => {
   // Verificar si hay un usuario guardado
-  const userEmail = localStorage.getItem("user");
+  const userEmail = localStorage.getItem("usuarioLogueado");
 
   // Si no hay usuario logueado, redirigir al login
   if (!userEmail && !window.location.href.includes("login.html")) {
@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     userMenu.innerHTML = `
       <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-         data-bs-toggle="dropdown" aria-expanded="false">
-         ${userEmail}
+        data-bs-toggle="dropdown" aria-expanded="false">
+        ${userEmail}
       </a>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
         <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
