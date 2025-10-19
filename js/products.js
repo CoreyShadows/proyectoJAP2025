@@ -204,7 +204,14 @@ function showProductsList(products) {
 }
 
 
-// modo oscuro modo claro
+document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (usuario) {
+        parrafo_nombre.innerHTML = usuario;
+    }
+});
+
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.getElementById("theme-switch");
 
