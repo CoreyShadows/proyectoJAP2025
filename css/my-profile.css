@@ -1,3 +1,19 @@
+:root {
+  --color-primario: #FFFFFF;
+  --color-secundario: #060f1f;
+  --Texto: #060f1f;
+  --color-gris: #F5F5F5;
+  --links: #265ebd;
+}
+.darkmode {
+  --color-primario:  #060f1f;
+  --color-secundario: #0f1720;
+  --Texto: #FFFFFF;
+  --color-gris: #0f1720;
+  --links: #7faaff;
+}
+
+
 body {
 background-color: #e5e5e5;
 font-family: 'Raleway', sans-serif;
@@ -145,33 +161,63 @@ outline: none;
 }
 .darkmode,
 .darkmode body {
-  color: var(--Texto);
-}
-
-.darkmode .card,
-.darkmode .card h2,
-.darkmode .card p,
-.darkmode .form-label,
-.darkmode .form-control,
-.darkmode .form-check-label,
-.darkmode a,
-.darkmode footer,
-.darkmode #nombre_usuario {
-  color: var(--Texto) ;
+  color: var(--color-secundario);
 }
 
 .darkmode .form-control {
   color: var(--Texto);
   background-color: transparent; 
 }
-.darkmode .form-control::placeholder {
-  color: rgba(255,255,255,0.7); 
+ 
+
+body.darkmode,
+.darkmode body{
+  background-color: var(--color-secundario) !important;
+  color: var(--color-secundario) !important;
 }
 
 .darkmode header,
-.darkmode footer{
-  background-color: var(--color-secundario) !important;
-  color: var(--color-primario) !important;
-  box-shadow: 1px 1px 1px 1px #FFFFFF;
+.darkmode footer
+{
+    background-color: var(--color-secundario) !important;
+    color: var(--color-primario) !important;
+    box-shadow: 1px 1px 1px 1px rgb(255, 255, 255);
+}
 
+.darkmode main{ 
+    background-color:var(--color-secundario) !important;
+    color: var(--color-primario) !important;
+    box-shadow: 1px 1px 1px 1px rgba(255, 255, 255, 0.705); 
+}
+
+.darkmode label,
+.darkmode img{
+    color: var(--Texto) !important;
+}
+
+.login-items {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto; /* empuja a la derecha cuando está dentro del header flex */
+    font-size: 0.95rem;
+    color: var(--Texto);
+    line-height: 1;
+    user-select: none;
+}
+
+/* nombre del usuario, con recorte si es muy largo */
+.login-items .user-name {
+    font-weight: 600;
+    color: var(--Texto);
+    text-decoration: none;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.login-items p{
+    margin: 0;
+    flex: wrap;
 }
