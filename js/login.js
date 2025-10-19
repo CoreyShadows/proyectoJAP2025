@@ -23,26 +23,23 @@ document.addEventListener("DOMContentLoaded", () => {
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.getElementById("theme-switch");
 
-// enable dark mode
+
 const enableDarkMode = () => {
     document.body.classList.add("darkmode");
     localStorage.setItem("darkmode", "active");
     darkmode = "active";
 }
 
-// disable dark mode
 const disableDarkMode = () => {
     document.body.classList.remove("darkmode");
     localStorage.setItem("darkmode", "inactive");
     darkmode = "inactive";
 }
 
-// apply saved preference on load
 if (darkmode === "active") {
     enableDarkMode();
 }
 
-// add click handler only if the element exists
 if (themeSwitch) {
     themeSwitch.addEventListener("click", () => {
         darkmode = localStorage.getItem("darkmode");
