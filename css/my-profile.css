@@ -199,25 +199,11 @@ body.darkmode,
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-left: auto; /* empuja a la derecha cuando está dentro del header flex */
-    font-size: 0.95rem;
+    margin-left: auto; 
+    font-size: 1rem;
     color: var(--Texto);
     line-height: 1;
     user-select: none;
 }
 
-/* nombre del usuario, con recorte si es muy largo */
-.login-items .user-name {
-    font-weight: 600;
-    color: var(--Texto);
-    text-decoration: none;
-    max-width: 180px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
 
-.login-items p{
-    margin: 0;
-    flex: wrap;
-}
