@@ -5,106 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Perfil - eMercado</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
-
-  <style>
-    body {
-      background-color: #e5e5e5;
-      font-family: 'Raleway', sans-serif;
-    }
-
-    header {
-      background-color: #040914;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 60px;
-      height: 100px;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    header img { height: 50px; }
-
-    .search-bar input {
-      border-radius: 20px;
-      border: none;
-      padding: 6px 12px;
-      width: 400px;
-      outline: none;
-    }
-
-    .search-bar button {
-      background-color: #ffffff;
-      color: #040914;
-      border: none;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      margin-left: 8px;
-      cursor: pointer;
-    }
-
-    .profile-card {
-      background-color: white;
-      border-radius: 20px;
-      max-width: 500px;
-      margin: 60px auto;
-      padding: 25px 30px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    .profile-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #ddd;
-    }
-
-    .field {
-      background-color: #f7f7f7;
-      border-radius: 10px;
-      padding: 8px 12px;
-      margin-bottom: 12px;
-    }
-
-    .field strong {
-      display: block;
-      font-size: 0.9rem;
-      color: #333;
-    }
-
-    .field input {
-      border: none;
-      background: transparent;
-      width: 100%;
-      font-size: 0.95rem;
-      padding: 5px 0;
-      outline: none;
-    }
-
-    .btn-dark {
-      background-color: #071226;
-      border-radius: 20px;
-      padding: 6px 20px;
-      margin: 5px;
-      font-size: 0.9rem;
-    }
-
-    label[for="profileImage"] {
-      cursor: pointer;
-      font-size: 0.9rem;
-      color: #007bff;
-    }
-  </style>
+  <link href="css/my-profile.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
 
   <header>
     <div class="d-flex align-items-center">
-      <img src="img/logo-jap.png" alt="Logo JAP">
+      <a href="index.html">
+      <img src="img/logo-jap.png" alt="Logo" class="img-fluid" style="max-height: 60px;" />
+    </a>
     </div>
 
     <form class="d-flex search-bar" role="search" onsubmit="buscar(event)">
@@ -112,12 +25,18 @@
       <button type="submit">🔍</button>
     </form>
 
-    <div class="d-flex align-items-center">
-      <span id="userName" class="me-2 fw-bold">Usuario</span>
-      <img src="img/avatar.png" alt="Avatar" class="rounded-circle" width="40">
+   <div class="d-flex gap-3 align-items-center" id="Nav-items">
+      <div class="login-items">
+        <a href="login.html" class="text-white"><i class="fa-solid fa-user fa-lg"></i></a>
+        <p id="nombre_usuario"></p>
+      </div>
+      <a href="products.html" class="text-white"><i class="fa-solid fa-bag-shopping fa-lg"></i></a>
     </div>
   </header>
-
+<button id="theme-switch">
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+</button>
   <main class="profile-card">
     <div class="text-center">
       <img id="previewImage" src="img/avatar.png" class="profile-img mb-2" alt="Foto de perfil">
@@ -223,6 +142,40 @@
       alert('Buscando: ' + valor);
     }
   }
+  document.addEventListener("DOMContentLoaded", () => {
+    const parrafo_nombre = document.getElementById("nombre_usuario")
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (usuario) {
+        parrafo_nombre.innerHTML = usuario;
+    }
+});
+
+let darkmode = localStorage.getItem("darkmode");
+const themeSwitch = document.getElementById("theme-switch");
+
+
+const enableDarkMode = () => {
+    document.body.classList.add("darkmode");
+    localStorage.setItem("darkmode", "active");
+    darkmode = "active";
+}
+
+const disableDarkMode = () => {
+    document.body.classList.remove("darkmode");
+    localStorage.setItem("darkmode", "inactive");
+    darkmode = "inactive";
+}
+
+if (darkmode === "active") {
+    enableDarkMode();
+}
+
+if (themeSwitch) {
+    themeSwitch.addEventListener("click", () => {
+        darkmode = localStorage.getItem("darkmode");
+        darkmode !== "active" ? enableDarkMode() : disableDarkMode();
+    });
+}
   </script>
 </body>
 </html>
