@@ -5,6 +5,13 @@
   --color-gris: #F5F5F5;
   --links: #265ebd;
 }
+.darkmode {
+  --color-primario:  #060f1f;
+  --color-secundario: #0f1720;
+  --Texto: #FFFFFF;
+  --color-gris: #0f1720;
+  --links: #7faaff;
+}
 
 html, body {
   height: 100%;
@@ -194,7 +201,6 @@ footer {
     font-size: 0.7rem;
   }
 }
-
 #theme-switch{
   height: 1.1rem;
   width: 1.1rem;
@@ -205,12 +211,13 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+  margin-left: auto; 
+  float: right; 
 }
 
-#theme-switch  svg{
-  fill:var(--color-gris);
-
+#theme-switch svg{
+  fill: var(--color-primario); 
+  transition: fill 0.2s ease, opacity 0.2s ease;
 }
 
 #theme-switch svg:first-child{
@@ -220,7 +227,25 @@ footer {
 .darkmode #theme-switch svg:last-child{
   display: none;
 }
+.darkmode #theme-switch svg:last-child{
+  display: none;
+}
 
 .darkmode #theme-switch svg:first-child{
   display: block;
 }
+
+.darkmode .btn-primary {
+  background-color: var(--color-primario);
+}
+
+.darkmode .container {
+  background-color: var(--color-secundario);
+  color: var(--color-primario);
+}
+
+.darkmode .container {
+  background-color: var(--color-primario);
+}
+ 
+.darkmode 
