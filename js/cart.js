@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
         Subtotal: ${subtotal} ${producto.moneda}
       </p>
+      <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">
+        <i class="fas fa-trash"></i>
+      </button>
     `;
 
     cartContainer.appendChild(productElement);
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cantidadInput = document.getElementById(`cant-${index}`);
     const subtotalElem = document.getElementById(`sub-${index}`);
 
+    // Modificar el evento input para actualizar también el badge
     cantidadInput.addEventListener("input", () => {
       const nuevaCantidad = parseInt(cantidadInput.value);
       if (nuevaCantidad < 1) return;
@@ -40,8 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
       producto.cantidad = nuevaCantidad;
       subtotalElem.textContent = `Subtotal: ${producto.costo * nuevaCantidad} ${producto.moneda}`;
 
-      // Actualizar localStorage
+      // Actualizar localStorage y badge
       localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+      updateCartBadge();
     });
   });
 });
+
+// Agregar función para eliminar productos
+function removeProduct(index) {
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  productosCarrito.splice(index, 1);
+  localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+  updateCartBadge();
+  location.reload();
+}
