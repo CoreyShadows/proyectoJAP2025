@@ -1,28 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const cartContainer = document.getElementById("cart-container"); 
-    const productosCarrito = localStorage.getItem("productosCarrito");
+  const cartContainer = document.getElementById("cart-container");
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
 
-    if (!productosCarrito) {
-        cartContainer.innerHTML = '<p>No hay productos en el carrito</p>';
-    } else {
-        const productos = JSON.parse(productosCarrito);
+  if (!productosCarrito || productosCarrito.length === 0) {
+    cartContainer.innerHTML = '<p class="text-center mt-4 text-muted">No hay productos en el carrito</p>';
+    return;
+  }
 
-        productos.forEach(producto => {
-            const productElement = document.createElement('div');
-            productElement.classList.add(
-                'cart-item', 'd-flex', 'flex-row', 'align-items-center', 
-                'justify-content-between', 'flex-nowrap', 'gap-3', 'p-2', 'border-bottom'
-            );
-            productElement.innerHTML = `
-                <p class="m-0 flex-shrink-0 text-truncate" style="min-width:100px;">${producto.nombre}</p>
-                <p class="m-0 flex-shrink-0 text-truncate" style="min-width:80px;">${producto.costo}</p>
-                <p class="m-0 flex-shrink-0 text-truncate" style="min-width:60px;">${producto.moneda}</p>
-                <input class="m-0 flex-shrink-0 text-truncate form-control" 
-                       type="number" value="${producto.cantidad}" min="1" style="width:80px;">
-                <p class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">Subtotal: ${producto.subtotal}</p>
-            `;
+  productosCarrito.forEach((producto, index) => {
+    const productElement = document.createElement("div");
+    productElement.classList.add(
+      "cart-item", "d-flex", "flex-row", "align-items-center",
+      "justify-content-between", "flex-nowrap", "gap-3", "p-2", "border-bottom"
+    );
 
-            cartContainer.appendChild(productElement);
-        });
-    }
+    const subtotal = producto.costo * producto.cantidad;
+
+    productElement.innerHTML = `
+      <p class="m-0 flex-shrink-0 text-truncate" style="min-width:100px;">${producto.nombre}</p>
+      <p class="m-0 flex-shrink-0 text-truncate" style="min-width:80px;">${producto.costo}</p>
+      <p class="m-0 flex-shrink-0 text-truncate" style="min-width:60px;">${producto.moneda}</p>
+      <input id="cant-${index}" class="form-control text-center flex-shrink-0"
+             type="number" value="${producto.cantidad}" min="1" style="width:80px;">
+      <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
+        Subtotal: ${subtotal} ${producto.moneda}
+      </p>
+    `;
+
+    cartContainer.appendChild(productElement);
+
+    // Evento para actualizar subtotal dinámicamente
+    const cantidadInput = document.getElementById(`cant-${index}`);
+    const subtotalElem = document.getElementById(`sub-${index}`);
+
+    cantidadInput.addEventListener("input", () => {
+      const nuevaCantidad = parseInt(cantidadInput.value);
+      if (nuevaCantidad < 1) return;
+
+      producto.cantidad = nuevaCantidad;
+      subtotalElem.textContent = `Subtotal: ${producto.costo * nuevaCantidad} ${producto.moneda}`;
+
+      // Actualizar localStorage
+      localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+    });
+  });
 });
