@@ -94,24 +94,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function updateCartBadge() {
   const cartBadge = document.getElementById('cart-badge');
-  const productos = JSON.parse(localStorage.getItem('productosCarrito')) || [];
-  const totalItems = productos.reduce((s, p) => s + (p.cantidad || 0), 0);
   if (cartBadge) {
+    const productos = JSON.parse(localStorage.getItem('productosCarrito')) || [];
+    const totalItems = productos.reduce((sum, product) => sum + product.cantidad, 0);
     cartBadge.textContent = totalItems;
-    cartBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    cartBadge.style.display = totalItems > 0 ? 'block' : 'none';
   }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  updateCartBadge();
-
-  // Asegura que cualquier elemento con clase .cart-link lleve a cart.html
-  document.querySelectorAll('.cart-link').forEach(el => {
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', (e) => {
-      // si es <a href="..."> ya navegará; esto no rompe esa funcionalidad
-      if (el.tagName.toLowerCase() === 'a') return;
-      window.location.href = 'cart.html';
-    });
-  });
-});
+// Llamar a la función cuando se carga la página
+document.addEventListener('DOMContentLoaded', updateCartBadge);
