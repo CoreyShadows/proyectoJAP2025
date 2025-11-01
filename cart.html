@@ -35,19 +35,20 @@
       </div>
     </div>
   </nav>
-  <main>
-  <div id="info" class="d-flex flex-row flex-nowrap align-items-center text-center justify-content-between p-2" style="overflow-x:auto;">
-  <p class="m-0 flex-shrink-0 text-truncate" style="font-size:clamp(12px, 1.2vw, 16px); min-width:80px;">Nombre</p>
-  <p class="m-0 flex-shrink-0 text-truncate" style="font-size:clamp(12px, 1.2vw, 16px); min-width:80px;">Costo</p>
-  <p class="m-0 flex-shrink-0 text-truncate" style="font-size:clamp(12px, 1.2vw, 16px); min-width:80px;">Moneda</p>
-  <p class="m-0 flex-shrink-0 text-truncate" style="font-size:clamp(12px, 1.2vw, 16px); min-width:80px;">Cantidad</p>
-  <p class="m-0 flex-shrink-0 text-truncate" style="font-size:clamp(12px, 1.2vw, 16px); min-width:80px;">Subtotal</p>
-</div>
-
-    <div id= "cart-container">
-   
+ <main class="container my-4">
+  <h2 class="text-center mb-4">Carrito de compras:</h2>
+  <div class="row">
+    <div class="col-lg-8" id="cart-container"></div>
+    <div class="col-lg-4">
+      <div class="card shadow-sm p-3">
+        <h5 class="text-center">SUBTOTAL DE LOS PRODUCTOS SELECCIONADOS:</h5>
+        <p id="total" class="text-center fw-bold fs-5 my-3">Total</p>
+        <p>Envío: Gratis</p>
+        <button id="comprar" class="btn btn-dark w-100">Comprar</button>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
