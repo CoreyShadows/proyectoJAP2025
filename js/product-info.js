@@ -76,12 +76,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ---- FUNCIONALIDAD DEL BOTÓN COMPRAR ----
+    // Reemplazar la función addCartProduct existente por esta versión mejorada:
     function addCartProduct(nombre, costo, moneda, imagen) {
       let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
 
-      const nuevoProducto = { nombre, costo, moneda, imagen, cantidad: 1 };
+      const nuevoProducto = { 
+        id: productID, // Agregar ID para identificar productos únicos
+        nombre, 
+        costo, 
+        moneda, 
+        imagen, 
+        cantidad: 1 
+      };
 
-      const productoExistente = productosCarrito.find(prod => prod.nombre === nombre);
+      const productoExistente = productosCarrito.find(prod => prod.id === productID);
       if (productoExistente) {
         productoExistente.cantidad += 1;
       } else {
@@ -89,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-
-      // Redirigir a cart.html
-      window.location.href = "cart.html";
+      updateCartBadge(); // Actualizar el badge
+      
+      showPushUp("Producto agregado al carrito ✅", "success");
     }
 
     // Evento del botón

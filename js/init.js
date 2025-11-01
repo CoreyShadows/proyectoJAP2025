@@ -78,4 +78,40 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location = "login.html";
     });
   }
+
+    // Selecciona íconos o elementos que representen el carrito.
+    const posiblesCarritos = document.querySelectorAll('.cart-link, .fa-bag-shopping, #cart-badge');
+
+    posiblesCarritos.forEach(el => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => {
+            // Evita interferir si ya es un <a> con otro comportamiento
+            if (el.tagName.toLowerCase() === 'a' && el.getAttribute('href')) return;
+            window.location.href = 'cart.html';
+        });
+    });
+});
+
+function updateCartBadge() {
+  const cartBadge = document.getElementById('cart-badge');
+  const productos = JSON.parse(localStorage.getItem('productosCarrito')) || [];
+  const totalItems = productos.reduce((s, p) => s + (p.cantidad || 0), 0);
+  if (cartBadge) {
+    cartBadge.textContent = totalItems;
+    cartBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateCartBadge();
+
+  // Asegura que cualquier elemento con clase .cart-link lleve a cart.html
+  document.querySelectorAll('.cart-link').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => {
+      // si es <a href="..."> ya navegará; esto no rompe esa funcionalidad
+      if (el.tagName.toLowerCase() === 'a') return;
+      window.location.href = 'cart.html';
+    });
+  });
 });
