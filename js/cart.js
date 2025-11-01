@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!productosCarrito || productosCarrito.length === 0) {
     cartContainer.innerHTML = '<p class="text-center mt-4 text-muted">No hay productos en el carrito</p>';
+    const summary = document.getElementById('cart-summary');
+    if (summary) summary.style.display = 'none';
     return;
   }
 
@@ -14,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "justify-content-between", "flex-nowrap", "gap-3", "p-2", "border-bottom"
     );
 
-    const subtotal = producto.costo * producto.cantidad;
+    const subtotal = Number(producto.costo) * Number(producto.cantidad);
 
     productElement.innerHTML = `
       <p class="m-0 flex-shrink-0 text-truncate" style="min-width:100px;">${producto.nombre}</p>
@@ -36,26 +38,44 @@ document.addEventListener("DOMContentLoaded", () => {
     const cantidadInput = document.getElementById(`cant-${index}`);
     const subtotalElem = document.getElementById(`sub-${index}`);
 
-    // Modificar el evento input para actualizar también el badge
+    // Modificar el evento input para actualizar también el badge y el total
     cantidadInput.addEventListener("input", () => {
       const nuevaCantidad = parseInt(cantidadInput.value);
-      if (nuevaCantidad < 1) return;
+      if (isNaN(nuevaCantidad) || nuevaCantidad < 1) return;
 
       producto.cantidad = nuevaCantidad;
-      subtotalElem.textContent = `Subtotal: ${producto.costo * nuevaCantidad} ${producto.moneda}`;
+      subtotalElem.textContent = `Subtotal: ${Number(producto.costo) * nuevaCantidad} ${producto.moneda}`;
 
       // Actualizar localStorage y badge
       localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-      updateCartBadge();
+      if (typeof updateCartBadge === 'function') updateCartBadge();
+      updateTotal();
     });
   });
+
+  // calcular total inicial
+  updateTotal();
 });
 
 // Agregar función para eliminar productos
 function removeProduct(index) {
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
   productosCarrito.splice(index, 1);
   localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-  updateCartBadge();
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+  // recargar para re-renderizar la lista (puedes cambiar por re-render sin recarga)
   location.reload();
+}
+
+// Función que calcula y muestra el total del carrito
+function updateTotal() {
+  const productos = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+  const total = productos.reduce((sum, p) => sum + (Number(p.costo) * Number(p.cantidad)), 0);
+  const moneda = productos.length ? (productos[0].moneda || '') : '';
+  const totalElem = document.getElementById('cart-total-amount');
+  if (totalElem) {
+    // Mostrar sin decimales si es entero, o con 2 decimales si tiene decimales
+    const displayTotal = Number.isInteger(total) ? total : total.toFixed(2);
+    totalElem.textContent = moneda ? `${displayTotal} ${moneda}` : displayTotal;
+  }
 }
