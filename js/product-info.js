@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="price">${product.cost} ${product.currency}</div>
           <p class="text-muted">${product.description}</p>
           <button class="btn btn-primary me-2">Preguntar</button>
-          <button id="btn-add-carrito" class="btn btn-success">Agregar al carrito</button>
+          <button id="btn-add-carrito" class="btn btn-success">Comprar</button>
         </div>
       </div>
 
@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
+    // Cambiar imagen principal al hacer clic en miniaturas
     const mainImage = document.getElementById("main-image");
     document.querySelectorAll(".thumb-img").forEach(thumb => {
       thumb.addEventListener("click", () => {
@@ -74,25 +75,28 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-      function addCartProduct(nombre, costo, moneda, imagen) {
-        
-        let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
-        const nuevoProducto = {nombre, costo, moneda, imagen, cantidad: 1};
+    // ---- FUNCIONALIDAD DEL BOTÓN COMPRAR ----
+    function addCartProduct(nombre, costo, moneda, imagen) {
+      let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
 
-        const productoExistente = productosCarrito.find(prod => prod.nombre === nombre);
-        if (productoExistente){
-          productoExistente.cantidad += 1;
-        } else {
-          productosCarrito.push(nuevoProducto);
-        }
-        
-        localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-        window.location.href = "cart.html";
-}
+      const nuevoProducto = { nombre, costo, moneda, imagen, cantidad: 1 };
 
+      const productoExistente = productosCarrito.find(prod => prod.nombre === nombre);
+      if (productoExistente) {
+        productoExistente.cantidad += 1;
+      } else {
+        productosCarrito.push(nuevoProducto);
+      }
 
+      localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
+
+      // Redirigir a cart.html
+      window.location.href = "cart.html";
+    }
+
+    // Evento del botón
     document.getElementById("btn-add-carrito").addEventListener("click", () => {
-    addCartProduct(product.name, product.cost, product.currency, product.images[0]);
+      addCartProduct(product.name, product.cost, product.currency, product.images[0]);
     });
   }
 
@@ -199,55 +203,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function setProductID(productid) {
   localStorage.setItem("productID", productid);
-  window.location = "product-info.html";}
+  window.location = "product-info.html";
+}
 
-  function showPushUp(message, type = "success") {
+function showPushUp(message, type = "success") {
   const push = document.createElement("div");
   push.className = `pushup ${type}`;
   push.textContent = message;
   document.body.appendChild(push);
 
-  // Mostrar
   setTimeout(() => push.classList.add("show"), 100);
-
-  // Ocultar después de 3 segundos
   setTimeout(() => {
     push.classList.remove("show");
     setTimeout(() => push.remove(), 400);
   }, 3000);
 }
 
+// --- DARK MODE ---
 document.addEventListener("DOMContentLoaded", () => {
-    const parrafo_nombre = document.getElementById("nombre_usuario")
-    const usuario = localStorage.getItem("usuarioLogueado");
-    if (usuario) {
-        parrafo_nombre.innerHTML = usuario;
-    }
+  const parrafo_nombre = document.getElementById("nombre_usuario");
+  const usuario = localStorage.getItem("usuarioLogueado");
+  if (usuario) {
+    parrafo_nombre.innerHTML = usuario;
+  }
 });
 
 let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.getElementById("theme-switch");
 
-
 const enableDarkMode = () => {
-    document.body.classList.add("darkmode");
-    localStorage.setItem("darkmode", "active");
-    darkmode = "active";
-}
+  document.body.classList.add("darkmode");
+  localStorage.setItem("darkmode", "active");
+  darkmode = "active";
+};
 
 const disableDarkMode = () => {
-    document.body.classList.remove("darkmode");
-    localStorage.setItem("darkmode", "inactive");
-    darkmode = "inactive";
-}
+  document.body.classList.remove("darkmode");
+  localStorage.setItem("darkmode", "inactive");
+  darkmode = "inactive";
+};
 
 if (darkmode === "active") {
-    enableDarkMode();
+  enableDarkMode();
 }
 
 if (themeSwitch) {
-    themeSwitch.addEventListener("click", () => {
-        darkmode = localStorage.getItem("darkmode");
-        darkmode !== "active" ? enableDarkMode() : disableDarkMode();
-    });
+  themeSwitch.addEventListener("click", () => {
+    darkmode = localStorage.getItem("darkmode");
+    darkmode !== "active" ? enableDarkMode() : disableDarkMode();
+  });
 }
