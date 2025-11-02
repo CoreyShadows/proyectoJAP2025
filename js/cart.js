@@ -67,7 +67,7 @@ function removeFromCart(index) {
 
   // calcular total inicial
   updateTotal();
-});
+
 
 // Agregar función para eliminar productos
 function removeProduct(index) {
