@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <p class="m-0 flex-shrink-0 text-truncate" style="min-width:80px;">${producto.costo}</p>
       <p class="m-0 flex-shrink-0 text-truncate" style="min-width:60px;">${producto.moneda}</p>
       <input id="cant-${index}" class="form-control text-center flex-shrink-0"
-             type="number" value="${producto.cantidad}" min="1" style="width:80px;">
+            type="number" value="${producto.cantidad}" min="1" style="width:80px;">
       <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
         total: ${subtotal} ${producto.moneda}
       </p>
