@@ -30,9 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
         total: ${subtotal} ${producto.moneda}
       </p>
-      <button class="btn btn-danger btn-sm" onclick="removeProduct(${index})">
-        <i class="fas fa-trash"></i>
-      </button>
     `;
     cartContainer.appendChild(productElement);
 
