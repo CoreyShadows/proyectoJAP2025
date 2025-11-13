@@ -88,3 +88,110 @@ function updateTotal() {
     totalElem.textContent = moneda ? `${displayTotal} ${moneda}` : displayTotal;
   }
 }
+
+// Ejemplo de subtotal fijo (2500) para demostración
+let subtotal = 2500;
+document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
+document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
+
+document.getElementById("btnSiguiente1").addEventListener("click", function () {
+  document.getElementById("paso1").classList.add("d-none");
+  document.getElementById("paso2").classList.remove("d-none");
+});
+
+// Calcular costo de envío
+document.querySelectorAll('input[name="envio"]').forEach(radio => {
+  radio.addEventListener("change", function () {
+    let porcentaje = parseFloat(this.value);
+    let costoEnvio = subtotal * porcentaje;
+    let total = subtotal + costoEnvio;
+
+    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
+    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
+  });
+});
+
+document.getElementById("btnSiguiente2").addEventListener("click", function () {
+  document.getElementById("paso2").classList.add("d-none");
+  document.getElementById("paso3").classList.remove("d-none");
+
+  document.getElementById("subtotalPaso3").textContent =
+    document.getElementById("subtotalPaso2").textContent.replace("Subtotal: ", "");
+  document.getElementById("envioPaso3").textContent =
+    document.getElementById("envioCost").textContent;
+  document.getElementById("totalPaso3").textContent =
+    document.getElementById("totalCost").textContent;
+});
+
+// Boton de volver
+document.getElementById("btnVolver1").addEventListener("click", function () {
+  document.getElementById("paso2").classList.add("d-none");
+  document.getElementById("paso1").classList.remove("d-none");
+});
+
+// Boton de volver
+document.getElementById("btnVolver2").addEventListener("click", function () {
+  document.getElementById("paso3").classList.add("d-none");
+  document.getElementById("paso2").classList.remove("d-none");
+});
+
+document.getElementById("btnSiguiente3").addEventListener("click", function () {
+  document.getElementById("paso3").classList.add("d-none");
+  document.getElementById("paso4").classList.remove("d-none");
+
+  document.getElementById("totalPaso4").textContent =
+    document.getElementById("totalPaso3").textContent;
+});
+
+// Boton de volver
+document.getElementById("btnVolver3").addEventListener("click", function () {
+  document.getElementById("paso4").classList.add("d-none");
+  document.getElementById("paso3").classList.remove("d-none");
+});
+
+// Mostrar campos según método de pago 
+document.getElementById("metodoPago").addEventListener("change", function () {
+  const tarjeta = document.getElementById("pagoTarjeta");
+  const banco = document.getElementById("transferenciaCampos");
+
+  tarjeta.classList.add("d-none");
+  banco.classList.add("d-none");
+
+  if (this.value === "tarjeta") {
+    tarjeta.classList.remove("d-none");
+  } else if (this.value === "banco") {
+    banco.classList.remove("d-none");
+  }
+});
+// Costos
+document.getElementById("btnSiguiente4").addEventListener("click", function () {
+  // Ocultar forma de pago, mostrar costos
+  document.getElementById("paso4").classList.add("d-none");
+  document.getElementById("paso5").classList.remove("d-none");
+
+  // Mostrar resumen final
+  document.getElementById("subtotalFinal").textContent = document.getElementById("subtotalPaso2").textContent.replace("Subtotal: ", "");
+  document.getElementById("costoEnvioFinal").textContent = document.getElementById("envioCost").textContent;
+  document.getElementById("totalFinal").textContent = document.getElementById("totalCost").textContent;
+
+  // Mostrar tipo de envío elegido
+  let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  if (envioSeleccionado) {
+    let tipoEnvio = envioSeleccionado.dataset.tipo || "Sin seleccionar";
+    document.getElementById("envioElegido").textContent = tipoEnvio;
+  }
+
+  // Mostrar dirección
+  let direccion = document.getElementById("direccionEnvio")?.value || "No especificada";
+  document.getElementById("direccionFinal").textContent = direccion;
+
+  // Mostrar forma de pago
+  let formaPago = document.getElementById("metodoPago").value === "tarjeta" ? "Tarjeta de crédito" : "Transferencia bancaria";
+  document.getElementById("formaPagoFinal").textContent = formaPago;
+});
+
+// Boton de volver a metodo de pago
+document.getElementById("btnVolver4").addEventListener("click", function () {
+  document.getElementById("paso5").classList.add("d-none");
+  document.getElementById("paso4").classList.remove("d-none");
+});

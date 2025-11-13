@@ -40,12 +40,182 @@
   <div class="row">
     <div class="col-lg-8" id="cart-container"></div>
     <div class="col-lg-4">
-      <div class="card shadow-sm p-3">
-        <h5 class="text-center">SUBTOTAL DE LOS PRODUCTOS SELECCIONADOS:</h5>
-        <p id="total" class="text-center fw-bold fs-5 my-3">Total</p>
-        <p>Envío: Gratis</p>
-        <button id="comprar" class="btn btn-dark w-100">Comprar</button>
+
+      <!-- Subtotal  -->
+      <div class="card shadow-sm p-3" id="paso1">
+        <h5 class="text-center">SUBTOTAL:</h5>
+        <p id="subtotalPaso1" class="text-center fw-bold fs-5 my-3">Subtotal: $0</p>
+        <button id="btnSiguiente1" class="btn btn-dark w-100">Siguiente</button>
       </div>
+
+      <!-- Tipo de envío -->
+      <div class="card shadow-sm p-3 d-none" id="paso2">
+        <!-- Flecha para volver -->
+        <button id="btnVolver1" class="btn btn-link text-start mb-2">← Volver</button>
+        <h5 class="text-center">Tipo de Envío</h5>
+        <p id="subtotalPaso2" class="text-center fw-bold fs-5 my-2">Subtotal: $0</p>
+        
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="envio" id="premium" value="0.15">
+            <label class="form-check-label" for="premium">Premium 2 a 5 días (15%)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="envio" id="express" value="0.07">
+            <label class="form-check-label" for="express">Express 5 a 8 días (7%)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="envio" id="standard" value="0.05">
+            <label class="form-check-label" for="standard">Standard 12 a 15 días (5%)</label>
+          </div>
+        </div>
+
+        <div class="costo mb-3">
+          <p>Costo de envío: <span id="envioCost">$0</span></p>
+          <hr>
+          <p class="fw-bold">Total: <span id="totalCost">$0</span></p>
+        </div>
+
+        <button id="btnSiguiente2" class="btn btn-dark w-100">Siguiente</button>
+      </div>
+
+      <!-- Dirección de envío -->
+      <div class="card shadow-sm p-3 d-none" id="paso3">
+        <button id="btnVolver2" class="btn btn-link text-start mb-2">← Volver</button>
+
+        <h5 class="text-center">Dirección de Envío</h5>
+        <form id="direccionForm" class="mt-3">
+          <div class="mb-2">
+            <label for="departamento" class="form-label">Departamento</label>
+            <input type="text" id="departamento" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label for="localidad" class="form-label">Localidad</label>
+            <input type="text" id="localidad" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label for="calle" class="form-label">Calle</label>
+            <input type="text" id="calle" class="form-control" required>
+          </div>
+          <div class="mb-2">
+            <label for="numero" class="form-label">Número</label>
+            <input type="number" id="numero" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="esquina" class="form-label">Esquina</label>
+            <input type="text" id="esquina" class="form-control" required>
+          </div>
+        </form>
+
+        <div class="costo mb-3">
+          <p>Subtotal: <span id="subtotalPaso3">$0</span></p>
+          <p>Costo de envío: <span id="envioPaso3">$0</span></p>
+          <hr>
+          <p class="fw-bold">Total: <span id="totalPaso3">$0</span></p>
+        </div>
+
+        <button id="btnSiguiente3" class="btn btn-dark w-100">Siguiente</button>
+      </div>
+
+      <!-- Forma de pago -->
+      <div class="card shadow-sm p-3 d-none" id="paso4">
+        <button id="btnVolver3" class="text-start mb-2">← Volver</button>
+
+        <h5 class="text-center">Forma de pago</h5>
+
+        <div class="mb-3">
+          <label for="metodoPago" class="form-label">Selecciona un método</label>
+          <select id="metodoPago" class="form-select">
+            <option value="">-- Elegir --</option>
+            <option value="tarjeta">Tarjeta de crédito</option>
+            <option value="banco">Transferencia bancaria</option>
+          </select>
+        </div>
+
+        <!-- Campos de tarjeta -->
+        <div id="pagoTarjeta" class="d-none">
+          <div class="mb-2">
+            <label for="nombreTarjeta" class="form-label">Nombre completo</label>
+            <input type="text" id="nombreTarjeta" class="form-control">
+          </div>
+          <div class="mb-2">
+            <label for="numeroTarjeta" class="form-label">Número de tarjeta</label>
+            <input type="text" id="numeroTarjeta" class="form-control">
+          </div>
+          <div class="mb-2">
+            <label for="codigoSeguridad" class="form-label">Código de seguridad</label>
+            <input type="text" id="codigoSeguridad" class="form-control">
+          </div>
+
+          <div class="row">
+            <label class="form-label">Expiración</label>
+            <div class="col">
+              <select id="expMes" class="form-select">
+                <option value="">Mes</option>
+                <option>Enero</option><option>Febrero</option><option>Marzo</option>
+                <option>Abril</option><option>Mayo</option><option>Junio</option>
+                <option>Julio</option><option>Agosto</option><option>Septiembre</option>
+                <option>Octubre</option><option>Noviembre</option><option>Diciembre</option>
+              </select>
+            </div>
+            <div class="col">
+              <select id="expAnio" class="form-select">
+                <option value="">Año</option>
+                <option>2025</option><option>2026</option><option>2027</option><option>2028</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transferencia bancaria -->
+        <div id="transferenciaCampos" class="d-none">
+          <div class="mb-3">
+            <label for="nombreTitular" class="form-label">Nombre del titular</label>
+            <input type="text" class="form-control" id="nombreTitular" placeholder="Ej: Juan Pérez">
+          </div>
+          <div class="mb-3">
+            <label for="numeroCuenta" class="form-label">Número de cuenta</label>
+            <input type="text" class="form-control" id="numeroCuenta" placeholder="Ej: 1234567890">
+          </div>
+          <div class="mb-3">
+            <label for="bancoEntidad" class="form-label">Banco o entidad financiera</label>
+            <input type="text" class="form-control" id="bancoEntidad" placeholder="Ej: Banco República">
+          </div>
+          <div class="mb-3">
+            <label for="numeroMovil" class="form-label">Número móvil</label>
+            <input type="text" class="form-control" id="numeroMovil" placeholder="Ej: +598 99 123 456">
+          </div>
+        </div>
+
+        <div class="costo mt-3">
+          <p class="fw-bold text-center fs-5">Total: <span id="totalPaso4">$0</span></p>
+        </div>
+
+        <button id="btnSiguiente4" class="btn btn-dark w-100 mt-2">Siguiente</button>
+      </div>
+
+      <!-- Costos -->
+      <div class="card shadow-sm p-3 d-none" id="paso5">
+        <button id="btnVolver4" class="text-start mb-2">← Volver</button>
+
+        <h5 class="text-center">Costos</h5>
+
+        <div class="resumen-costos">
+          <p><strong>Subtotal:</strong> <span id="subtotalFinal"></span></p>
+          <p><strong>Envío elegido:</strong> <span id="envioElegido"></span></p>
+          <p><strong>Costo de envío:</strong> <span id="costoEnvioFinal"></span></p>
+          <p><strong>Dirección:</strong> <span id="direccionFinal"></span></p>
+          <p><strong>Forma de pago:</strong> <span id="formaPagoFinal"></span></p>
+          <p class="fw-bold fs-5 mt-3">Total: <span id="totalFinal"></span></p>
+        </div>
+
+        <button id="btnFinalizar" class="btn btn-dark w-100 mt-3">Finalizar compra</button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
     </div>
   </div>
 </main>

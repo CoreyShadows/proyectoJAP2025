@@ -63,3 +63,93 @@ footer {
         font-size: 12px;
     }
 }
+/* Estilos para carrito */
+
+#paso1, #paso2 {
+  transition: all 0.3s ease;
+}
+
+#paso1.d-none, #paso2.d-none {
+  display: none !important;
+}
+
+.costos {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.costos p {
+  margin: 4px 0;
+}
+ /* Estilos para botones de volver */
+#btnVolver1 {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+}
+#btnVolver1:hover {
+  text-decoration: underline;
+}
+#btnVolver2 {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+}
+#btnVolver2:hover {
+  text-decoration: underline;
+}
+/* 🔹 Estilos para select y botón volver */
+#btnVolver3 {
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+}
+#btnVolver3:hover {
+  text-decoration: underline;
+}
+select.form-select, input.form-control {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+#pagoTarjeta, #transferenciaCampos {
+  transition: all 0.3s ease;
+}
+#btnVolver3 {
+  color: #000;
+  font-weight: 600;
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#btnVolver3:hover {
+  text-decoration: underline;
+}
+#paso5 {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.resumen-costos p {
+  margin: 6px 0;
+}
+
+#btnFinalizar {
+  font-weight: 600;
+}
+#btnVolver4 {
+  color: #000;
+  font-weight: 600;
+  background: none;
+  border: none;
+  text-decoration: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#btnVolver4:hover {
+  text-decoration: underline;
+}
