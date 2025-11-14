@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
       if (typeof updateCartBadge === 'function') updateCartBadge();
       updateTotal();
+      Subtotal();
     });
   });
 });
@@ -89,15 +90,24 @@ function updateTotal() {
   }
 }
 
-// Ejemplo de subtotal fijo (2500) para demostración
-let subtotal = 2500;
-document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
-document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
 
+function Subtotal() {
+  let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+  subtotal = 0;
+  productosCarrito.forEach(producto => {
+    subtotal += Number(producto.costo) * Number(producto.cantidad);
+  });
+  document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
+  document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
+
+}
+Subtotal();
 document.getElementById("btnSiguiente1").addEventListener("click", function () {
   document.getElementById("paso1").classList.add("d-none");
   document.getElementById("paso2").classList.remove("d-none");
 });
+
+
 
 // Calcular costo de envío
 document.querySelectorAll('input[name="envio"]').forEach(radio => {
@@ -195,3 +205,25 @@ document.getElementById("btnVolver4").addEventListener("click", function () {
   document.getElementById("paso5").classList.add("d-none");
   document.getElementById("paso4").classList.remove("d-none");
 });
+
+
+document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
+    event.preventDefault(); // 👈 IMPORTANTE: evita que el botón avance
+    
+    const departamento = document.getElementById("departamento").value.trim();
+    const localidad = document.getElementById("localidad").value.trim();
+    const calle = document.getElementById("calle").value.trim();
+    const numero = document.getElementById("numero").value.trim();
+    const esquina = document.getElementById("esquina").value.trim();
+
+    if (departamento === "" || localidad === "" || calle === "" || numero === "" || esquina === "") {
+        alert("Por favor complete todos los campos de dirección.");
+        return; // 👈 se corta acá y NO avanza
+    }
+
+    // Si está todo correcto → recién acá avanzás
+    document.getElementById("paso3").classList.add("d-none");
+    document.getElementById("paso4").classList.remove("d-none");
+});
+
+
