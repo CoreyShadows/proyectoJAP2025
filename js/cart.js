@@ -208,7 +208,7 @@ document.getElementById("btnVolver4").addEventListener("click", function () {
 
 
 document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
-    event.preventDefault(); // 👈 IMPORTANTE: evita que el botón avance
+    event.preventDefault(); 
     
     const departamento = document.getElementById("departamento").value.trim();
     const localidad = document.getElementById("localidad").value.trim();
@@ -218,10 +218,8 @@ document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
 
     if (departamento === "" || localidad === "" || calle === "" || numero === "" || esquina === "") {
         alert("Por favor complete todos los campos de dirección.");
-        return; // 👈 se corta acá y NO avanza
+        return; 
     }
-
-    // Si está todo correcto → recién acá avanzás
     document.getElementById("paso3").classList.add("d-none");
     document.getElementById("paso4").classList.remove("d-none");
 });
