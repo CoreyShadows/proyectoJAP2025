@@ -107,8 +107,107 @@ document.getElementById("btnSiguiente1").addEventListener("click", function () {
   document.getElementById("paso2").classList.remove("d-none");
 });
 
+document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
+  event.preventDefault(); 
+    
+  const departamento = document.getElementById("departamento").value.trim();
+  const localidad = document.getElementById("localidad").value.trim();
+  const calle = document.getElementById("calle").value.trim();
+  const numero = document.getElementById("numero").value.trim();
+  const esquina = document.getElementById("esquina").value.trim();
+
+  if (!departamento || !localidad || !calle || !numero || !esquina) {
+    alert("Por favor complete todos los campos de dirección.");
+    return;
+  }
+
+  document.getElementById("paso3").classList.add("d-none");
+  document.getElementById("paso4").classList.remove("d-none");
+});
 
 
+
+
+const metodoPagoSelect = document.getElementById("metodoPago");
+const pagoTarjeta = document.getElementById("pagoTarjeta");
+const transferenciaCampos = document.getElementById("transferenciaCampos");
+
+metodoPagoSelect.addEventListener("change", () => {
+  const metodo = metodoPagoSelect.value;
+
+  if (metodo === "tarjeta") {
+    pagoTarjeta.classList.remove("d-none");
+    transferenciaCampos.classList.add("d-none");
+  } 
+  else if (metodo === "banco") {
+    pagoTarjeta.classList.add("d-none");
+    transferenciaCampos.classList.remove("d-none");
+  } 
+  else {
+    pagoTarjeta.classList.add("d-none");
+    transferenciaCampos.classList.add("d-none");
+  }
+});
+document.getElementById("btnSiguiente4").addEventListener("click", () => {
+  const metodo = metodoPagoSelect.value;
+
+  if (!metodo) {
+    alert("Por favor selecciona una forma de pago.");
+    return;
+  }
+
+  if (metodo === "tarjeta") {
+    const nombreTarjeta = document.getElementById("nombreTarjeta").value.trim();
+    const NumeroTarjeta= document.getElementById("numeroTarjeta").value.trim();
+    const CodigoSeguridad = document.getElementById("codigoSeguridad").value.trim();
+    const expMes = document.getElementById("expMes").value.trim();
+    const expAnio = document.getElementById("expAnio").value.trim();
+    
+    if (!nombreTarjeta || !NumeroTarjeta || !CodigoSeguridad || !expMes || !expAnio) {
+      alert("Completa todos los datos de la tarjeta.");
+      return;
+    }
+  }
+
+  if (metodo === "banco") {
+    const numeroCuenta = document.getElementById("numeroCuenta").value.trim();
+    const nombreTitular = document.getElementById("nombreTitular").value.trim();
+    const bancoEntidad = document.getElementById("bancoEntidad").value.trim();
+    const numeroMovil = document.getElementById("numeroMovil").value.trim();
+    
+    if (!numeroCuenta || !nombreTitular || !bancoEntidad || !numeroMovil) {
+      alert("Completa todos los datos de la transferencia bancaria.");
+      return;
+    }
+  }
+  document.getElementById("paso4").classList.add("d-none");
+  document.getElementById("paso5").classList.remove("d-none");
+});
+
+
+document.getElementById("btnFinalizar").addEventListener("click", () => {
+  const subtotal = document.getElementById("subtotalPaso1").textContent;
+  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  const metodoPago = document.getElementById("metodoPago").value;
+  if (subtotal === "$0" || subtotal === "Subtotal: $0") {
+    alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
+    return;
+  }
+  if (!envioSeleccionado) {
+    alert("Por favor selecciona un método de envío.");
+    return;
+  }
+  if (!metodoPago) {
+    alert("Por favor selecciona una forma de pago.");
+    return;
+  } 
+  alert("¡Compra realizada con éxito! Gracias por tu compra.");
+    localStorage.removeItem("productosCarrito");
+    window.location.href = "index.html"; 
+  });
+
+
+  
 // Calcular costo de envío
 document.querySelectorAll('input[name="envio"]').forEach(radio => {
   radio.addEventListener("change", function () {
@@ -145,14 +244,6 @@ document.getElementById("btnVolver2").addEventListener("click", function () {
   document.getElementById("paso2").classList.remove("d-none");
 });
 
-document.getElementById("btnSiguiente3").addEventListener("click", function () {
-  document.getElementById("paso3").classList.add("d-none");
-  document.getElementById("paso4").classList.remove("d-none");
-
-  document.getElementById("totalPaso4").textContent =
-    document.getElementById("totalPaso3").textContent;
-});
-
 // Boton de volver
 document.getElementById("btnVolver3").addEventListener("click", function () {
   document.getElementById("paso4").classList.add("d-none");
@@ -176,13 +267,12 @@ document.getElementById("metodoPago").addEventListener("change", function () {
 // Costos
 document.getElementById("btnSiguiente4").addEventListener("click", function () {
   // Ocultar forma de pago, mostrar costos
-  document.getElementById("paso4").classList.add("d-none");
-  document.getElementById("paso5").classList.remove("d-none");
 
   // Mostrar resumen final
   document.getElementById("subtotalFinal").textContent = document.getElementById("subtotalPaso2").textContent.replace("Subtotal: ", "");
   document.getElementById("costoEnvioFinal").textContent = document.getElementById("envioCost").textContent;
   document.getElementById("totalFinal").textContent = document.getElementById("totalCost").textContent;
+  document.getElementById("totalPaso4").textContent = document.getElementById("totalCost").textContent;
 
   // Mostrar tipo de envío elegido
   let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
@@ -205,23 +295,4 @@ document.getElementById("btnVolver4").addEventListener("click", function () {
   document.getElementById("paso5").classList.add("d-none");
   document.getElementById("paso4").classList.remove("d-none");
 });
-
-
-document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
-    event.preventDefault(); 
-    
-    const departamento = document.getElementById("departamento").value.trim();
-    const localidad = document.getElementById("localidad").value.trim();
-    const calle = document.getElementById("calle").value.trim();
-    const numero = document.getElementById("numero").value.trim();
-    const esquina = document.getElementById("esquina").value.trim();
-
-    if (departamento === "" || localidad === "" || calle === "" || numero === "" || esquina === "") {
-        alert("Por favor complete todos los campos de dirección.");
-        return; 
-    }
-    document.getElementById("paso3").classList.add("d-none");
-    document.getElementById("paso4").classList.remove("d-none");
-});
-
 
