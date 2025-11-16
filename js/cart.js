@@ -84,24 +84,47 @@ function updateTotal() {
   }
 }
 
+let subtotal = 0;
+let tipoEnvio = "";
+
 function Subtotal() {
   let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
   subtotal = 0;
-  productosCarrito.forEach(producto => {
-    subtotal += Number(producto.costo) * Number(producto.cantidad);
-  });
-  document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
-  document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
+  
+  const ValorUSD = 40;
 
-   let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  productosCarrito.forEach(producto => {
+
+    let costo = Number(producto.costo);
+
+    if (producto.moneda === "USD") {
+      costo = costo * ValorUSD;
+    }
+    subtotal += costo * Number(producto.cantidad);
+  });
+
+  document.getElementById("subtotalPaso1").textContent = "Subtotal: UYU " + subtotal;
+  document.getElementById("subtotalPaso2").textContent = "Subtotal: UYU " + subtotal;
+  document.getElementById("subtotalPaso3").textContent = "UYU " + subtotal;
+  document.getElementById("subtotalFinal").textContent = "UYU " + subtotal;
+
+  let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
   if (envioSeleccionado) {
     let porcentaje = parseFloat(envioSeleccionado.value);
     let costoEnvio = subtotal * porcentaje;
     let total = subtotal + costoEnvio;
 
-    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
-    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
-    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+    document.getElementById("envioCost").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("envioPaso3").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("costoEnvioFinal").textContent = "UYU " + costoEnvio.toFixed(2);
+
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso3").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalFinal").textContent = "UYU " + total.toFixed(2);
+  } else {
+    total = subtotal;
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
   }
 }
 
@@ -202,7 +225,7 @@ document.getElementById("btnFinalizar").addEventListener("click", () => {
   const subtotal = document.getElementById("subtotalPaso1").textContent;
   const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
   const metodoPago = document.getElementById("metodoPago").value;
-  if (subtotal === "$0" || subtotal === "Subtotal: $0") {
+  if (subtotal === "UYU 0" || subtotal === "Subtotal: UYU 0") {
     alerta("El carrito está vacío. Agrega productos antes de finalizar la compra.");
     return;
   }
@@ -220,7 +243,7 @@ Swal.fire({
   icon: "success",
   title: "¡Compra realizada con éxito!",
   showConfirmButton: false,
-  timer: 3000,
+  timer: 2000,
   timerProgressBar: true,
 }).then(() => {
   localStorage.removeItem("productosCarrito");
@@ -235,9 +258,9 @@ document.querySelectorAll('input[name="envio"]').forEach(radio => {
     let costoEnvio = subtotal * porcentaje;
     let total = subtotal + costoEnvio;
 
-    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
-    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
-    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+    document.getElementById("envioCost").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "UYU " + total.toFixed(2);
     let labelElegido = document.querySelector('label[for="' + this.id + '"]').textContent;
     document.getElementById("envioElegido").textContent = labelElegido;
     tipoEnvio = labelElegido;
