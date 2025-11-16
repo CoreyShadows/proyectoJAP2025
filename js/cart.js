@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  renderCarrito();
+  });
+
+function renderCarrito() {
   const cartContainer = document.getElementById("cart-container");
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+
+
+  cartContainer.innerHTML = ""; 
 
   if (!productosCarrito || productosCarrito.length === 0) {
     cartContainer.innerHTML = '<p class="text-center mt-4 text-muted">No hay productos en el carrito</p>';
@@ -28,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <input id="cant-${index}" class="form-control text-center flex-shrink-0"
             type="number" value="${producto.cantidad}" min="1" style="width:80px;">
       <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
-        total: ${subtotal} ${producto.moneda}
+        Subtotal: ${subtotal} ${producto.moneda}
       </p>
     `;
     cartContainer.appendChild(productElement);
@@ -48,29 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTotal();
       Subtotal();
     });
-    
   });
-  
-});
+}
+
 
 function removeFromCart(index) {
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
   productosCarrito.splice(index, 1);
   localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-  location.reload();
+
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+
+  // volver a dibujar el carrito sin recargar
+  renderCarrito();
+  updateTotal();
+  Subtotal();
 }
 
 // calcular total inicial
 updateTotal();
 
-// Agregar función para eliminar productos
-function removeProduct(index) {
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
-  productosCarrito.splice(index, 1);
-  localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-  if (typeof updateCartBadge === 'function') updateCartBadge();
-  location.reload();
-}
 
 // Función que calcula y muestra el total del carrito
 function updateTotal() {
