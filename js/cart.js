@@ -48,7 +48,9 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTotal();
       Subtotal();
     });
+    
   });
+  
 });
 
 function removeFromCart(index) {
@@ -91,7 +93,18 @@ function Subtotal() {
   document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
   document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
 
+   let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  if (envioSeleccionado) {
+    let porcentaje = parseFloat(envioSeleccionado.value);
+    let costoEnvio = subtotal * porcentaje;
+    let total = subtotal + costoEnvio;
+
+    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
+    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+  }
 }
+
 Subtotal();
 
 document.getElementById("btnSiguiente1").addEventListener("click", function () {
@@ -99,6 +112,17 @@ document.getElementById("btnSiguiente1").addEventListener("click", function () {
   document.getElementById("paso2").classList.remove("d-none");
 });
 
+
+document.getElementById("btnSiguiente2").addEventListener("click", (event) => {
+  const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  if (!envioSeleccionado) {
+    alerta("Por favor selecciona un método de envío.");
+    return;
+  }
+  event.preventDefault(); 
+  document.getElementById("paso2").classList.add("d-none");
+  document.getElementById("paso3").classList.remove("d-none");
+});
 document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
   event.preventDefault(); 
     
@@ -109,7 +133,7 @@ document.getElementById("btnSiguiente3").addEventListener("click", (event) => {
   const esquina = document.getElementById("esquina").value.trim();
 
   if (!departamento || !localidad || !calle || !numero || !esquina) {
-    alert("Por favor complete todos los campos de dirección.");
+    alerta("Por favor complete todos los campos de dirección.");
     return;
   }
 
@@ -142,7 +166,7 @@ document.getElementById("btnSiguiente4").addEventListener("click", () => {
   const metodo = metodoPagoSelect.value;
 
   if (!metodo) {
-    alert("Por favor selecciona una forma de pago.");
+    alerta("Por favor selecciona una forma de pago.");
     return;
   }
 
@@ -154,7 +178,7 @@ document.getElementById("btnSiguiente4").addEventListener("click", () => {
     const expAnio = document.getElementById("expAnio").value.trim();
     
     if (!nombreTarjeta || !NumeroTarjeta || !CodigoSeguridad || !expMes || !expAnio) {
-      alert("Completa todos los datos de la tarjeta.");
+      alerta("Completa todos los datos de la tarjeta.");
       return;
     }
   }
@@ -166,7 +190,7 @@ document.getElementById("btnSiguiente4").addEventListener("click", () => {
     const numeroMovil = document.getElementById("numeroMovil").value.trim();
     
     if (!numeroCuenta || !nombreTitular || !bancoEntidad || !numeroMovil) {
-      alert("Completa todos los datos de la transferencia bancaria.");
+      alerta("Completa todos los datos de la transferencia bancaria.");
       return;
     }
   }
@@ -179,20 +203,29 @@ document.getElementById("btnFinalizar").addEventListener("click", () => {
   const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
   const metodoPago = document.getElementById("metodoPago").value;
   if (subtotal === "$0" || subtotal === "Subtotal: $0") {
-    alert("El carrito está vacío. Agrega productos antes de finalizar la compra.");
+    alerta("El carrito está vacío. Agrega productos antes de finalizar la compra.");
     return;
   }
   if (!envioSeleccionado) {
-    alert("Por favor selecciona un método de envío.");
+    alerta("Por favor selecciona un método de envío.");
     return;
   }
   if (!metodoPago) {
-    alert("Por favor selecciona una forma de pago.");
+    alerta("Por favor selecciona una forma de pago.");
     return;
   } 
-  alert("¡Compra realizada con éxito! Gracias por tu compra.");
+Swal.fire({
+  toast: true,
+  position: "top-end",
+  icon: "success",
+  title: "¡Compra realizada con éxito!",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+}).then(() => {
   localStorage.removeItem("productosCarrito");
-  window.location.href = "index.html"; 
+  window.location.href = "index.html";
+});
 });
 
 // Calcular costo de envío
@@ -204,12 +237,15 @@ document.querySelectorAll('input[name="envio"]').forEach(radio => {
 
     document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
     document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+    let labelElegido = document.querySelector('label[for="' + this.id + '"]').textContent;
+    document.getElementById("envioElegido").textContent = labelElegido;
+    tipoEnvio = labelElegido;
   });
 });
 
 document.getElementById("btnSiguiente2").addEventListener("click", function () {
-  document.getElementById("paso2").classList.add("d-none");
-  document.getElementById("paso3").classList.remove("d-none");
+
 
   document.getElementById("subtotalPaso3").textContent =
     document.getElementById("subtotalPaso2").textContent.replace("Subtotal: ", "");
@@ -246,8 +282,11 @@ document.getElementById("btnSiguiente4").addEventListener("click", function () {
   if (envioSeleccionado) {
     document.getElementById("envioElegido").textContent = tipoEnvio;
   }
-
-  let direccion = document.getElementById("direccionEnvio")?.value || "No especificada";
+  const localidad = document.getElementById("localidad").value;
+  const calle = document.getElementById("calle").value;
+  const numero = document.getElementById("numero").value;
+  let direccion = document.getElementById("direccionFinal").textContent =
+    localidad + "  " + calle + ", " + numero;
   document.getElementById("direccionFinal").textContent = direccion;
 
   let formaPago = document.getElementById("metodoPago").value === "tarjeta" ? "Tarjeta de crédito" : "Transferencia bancaria";
@@ -258,3 +297,14 @@ document.getElementById("btnVolver4").addEventListener("click", function () {
   document.getElementById("paso5").classList.add("d-none");
   document.getElementById("paso4").classList.remove("d-none");
 });
+
+
+function alerta(mensaje) {
+  Swal.fire({
+    icon: "warning",
+    title: "Atención",
+    text: mensaje,
+    confirmButtonColor: "#25ad6eff",
+  });
+}
+
