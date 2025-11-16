@@ -42,39 +42,19 @@ let getJSONData = function(url){
 
 // --- Menú del usuario ---
 document.addEventListener("DOMContentLoaded", () => {
-  // Verificar si hay un usuario guardado
-  const userEmail = localStorage.getItem("usuarioLogueado");
+    const usuario = localStorage.getItem("usuarioLogueado");
+    if (!usuario) {
+        window.location.href = "login.html";
+    } else {
+    }
+});
 
-  // Si no hay usuario logueado, redirigir al login
-  if (!userEmail && !window.location.href.includes("login.html")) {
-    window.location = "login.html";
-  }
-
-  // Insertar el menú del usuario en la barra de navegación
-  const nav = document.querySelector(".navbar-nav");
-  if (nav && userEmail) {
-    const userMenu = document.createElement("li");
-    userMenu.classList.add("nav-item", "dropdown");
-
-    userMenu.innerHTML = `
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-        data-bs-toggle="dropdown" aria-expanded="false">
-        ${userEmail}
-      </a>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-        <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" id="logout">Cerrar sesión</a></li>
-      </ul>
-    `;
-    nav.appendChild(userMenu);
-  }
 
   // Función de logout
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("usuarioLogueado");
+      localStorage.clear();
       window.location = "login.html";
     });
   }
@@ -90,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             window.location.href = 'cart.html';
         });
     });
-});
 
 function updateCartBadge() {
   const cartBadge = document.getElementById('cart-badge');
@@ -104,7 +83,14 @@ function updateCartBadge() {
 
 document.addEventListener('DOMContentLoaded', () => {
   updateCartBadge();
-
+  
+  // Actualiza el nombre de usuario para que se vea en el haeder
+  const parrafo_nombre = document.getElementById("nombre_usuario");
+  const usuario = localStorage.getItem("usuarioLogueado");
+  if (usuario) {
+    parrafo_nombre.innerHTML = usuario;
+  }
+  
   // Asegura que cualquier elemento con clase .cart-link lleve a cart.html
   document.querySelectorAll('.cart-link').forEach(el => {
     el.style.cursor = 'pointer';

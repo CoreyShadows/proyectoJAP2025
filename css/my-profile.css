@@ -19,39 +19,6 @@ background-color: #e5e5e5;
 font-family: 'Raleway', sans-serif;
     }
 
-    header {
-background-color: #040914;
-color: white;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 20px 60px;
-height: 100px;
-flex-wrap: wrap;
-gap: 15px;
-    }
-
-    header img { height: 50px; }
-
-    .search-bar input {
-border-radius: 20px;
-border: none;
-padding: 6px 12px;
-width: 400px;
-outline: none;
-    }
-
-    .search-bar button {
-      background-color: #ffffff;
-      color: #040914;
-      border: none;
-      border-radius: 50%;
-      width: 35px;
-      height: 35px;
-      margin-left: 8px;
-      cursor: pointer;
-    }
-
     .profile-card {
       background-color: white;
       border-radius: 20px;
@@ -164,12 +131,6 @@ outline: none;
   color: var(--color-secundario);
 }
 
-.darkmode .form-control {
-  color: var(--Texto);
-  background-color: transparent; 
-}
- 
-
 body.darkmode,
 .darkmode body{
   background-color: var(--color-secundario) !important;
@@ -195,15 +156,349 @@ body.darkmode,
     color: var(--Texto) !important;
 }
 
+/* Header */
+header {
+  z-index: 10;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap; /* permite que los elementos se envuelvan en pantallas estrechas */
+  gap: 0.5rem;
+}
+
+#Search-bar {
+  display: flex;
+  flex: 1 1 auto; /* crece y se encoge según el espacio */
+  min-width: 120px;
+  max-width: 400px;
+  margin: 0 0.5rem;
+}
+
+#Search-bar .input-group {
+  width: 100%;
+}
+
 .login-items {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-left: auto; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#nombre_usuario {
+  color: white;
+  margin: 0;
+}
+
+a.text-white {
+  font-size: 1rem;
+}
+
+.nav-links {
+  text-decoration: none;
+}
+
+/* Responsive ajustes extra */
+@media (max-width: 480px) {
+  .card-img-top {
+    height: 150px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-group {
+    width: 100% !important;
+  }
+}
+
+/* 1366x768 - pantalla estándar */
+@media (min-width: 321px) and (max-width: 1366px)  {
+  .products-container {
+    flex-direction: row;
+    justify-content:center;
+    gap:1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .product-card {
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
     font-size: 1rem;
-    color: var(--Texto);
-    line-height: 1;
-    user-select: none;
+  }
+
+  #Search-bar input {
+    line-height: 0rem;
+    box-sizing: border-box;
+  }
+  .fa-user{
+    font-size: 2.5rem;
+    position: relative;
+    top: 13px;
+    
+  }
+  .login-items {
+    font-size: 0.6rem;
+  }
+  .login-items p {
+    margin: 0;
+    position: relative;
+    top: 15px;
+    font-size: 1.2rem;
+  }
+  .fa-bag-shopping {
+    font-size: 2.5rem;
+    position: relative;
+    bottom: 2px;
+    right: 10px;
+  }
+#Search-bar {
+  max-width: 35%; 
+}
+
+#Search-bar .input-group {
+  width: 100%;
+}
+
+#Search-bar .form-control {
+  width: 70%;
+  height: 35px;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem; 
+}
+
+#Search-bar .btn {
+  height: 35px; 
+  padding: 0 0.5rem;
+  font-size: 0.85rem;
+}
+
+#Search-bar .fa-magnifying-glass {
+  font-size: 1rem; 
+}
+
+#Logo img {
+  max-height: 70px; 
+  height: auto;
+}
+}
+@media (min-width: 768px) {
+    .products-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .product-card {
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
+    font-size: 1rem;
+  }
+
+  #Search-bar {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+    .login-items{
+    position: relative;
+    top: 5px;
+    
+  }
+
+  .login-items p {
+    font-size: 0.7rem;
+    margin: 0;
+    position: relative;
+    top: 3px;
+  }
+  .fa-user{
+    font-size: 1.7rem;
+    position: relative;
+    top: 5px
+    
+  }
+  .fa-bag-shopping {
+    font-size: 1.7rem;
+    position: relative;
+    right: 10px;
+    top: 1px;
+  
+  }
+  #Nav-items{
+    font-size: 0.8rem;
+  }
+
+  #Search-bar {
+  max-width: 40%; 
+}
+
+#Search-bar .form-control,
+#Search-bar .btn {
+  height: 32px;
+  font-size: 0.8rem;
+}
+
+#Search-bar .fa-magnifying-glass {
+  font-size: 0.8rem;
+}
+  #Logo img {
+    max-height: 50px;
+  }
+}
+
+/* 768x1024 - tablet vertical */
+@media (max-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .products-container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+  }
+
+  .product-card {
+    max-width: 260px;
+    padding: 1rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.4rem;
+  }
+
+  .product-card p {
+    font-size: 1rem;
+  }
+
+  #Search-bar {
+    max-width: 250px;
+    margin: 0 auto;
+  }
+    .login-items{
+    position: relative;
+    top: 5px;
+    
+  }
+
+  .login-items p {
+    font-size: 0.7rem;
+    margin: 0;
+    position: relative;
+    top: 3px;
+  }
+  .fa-user{
+    font-size: 1.7rem;
+    position: relative;
+    top: 5px
+    
+  }
+  .fa-bag-shopping {
+    font-size: 1.7rem;
+    position: relative;
+    right: 10px;
+    top: 1px;
+  
+  }
+  #Nav-items{
+    font-size: 0.8rem;
+  }
+
+  #Search-bar {
+  max-width: 220px; 
+}
+
+  #Search-bar .form-control,
+  #Search-bar .btn {
+  height: 32px;
+  font-size: 0.8rem;
+}
+
+  #Search-bar .fa-magnifying-glass {
+  font-size: 0.8rem;
+}
+  #Logo img {
+    max-height: 50px;
+  }
 }
 
 
+/* 320x568 - smartphone pequeño */
+@media (max-width: 320px) and (max-height: 568px) {
+  .products-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .product-card {
+    max-width: 100%;
+    padding: 1rem;
+    box-shadow: none;
+  }
+
+  .product-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  #Search-bar {
+    width: 100%;
+    height: 30px;
+    margin: 0 auto;
+  }
+  .login-items{
+    position: relative;
+    top: 10px;
+    
+  }
+  .fa-user{
+    font-size: 1.8rem;
+    
+  }
+  .fa-bag-shopping {
+    font-size: 1.8rem;
+    position: relative;
+    right: 10px;
+  
+  }
+  #Nav-items{
+    font-size: 0.8rem;
+  }
+
+  .thumb-container{
+    max-width: 3rem;
+    margin-right: 0.25rem;
+  }
+}
+
+@media (max-width: 700px) {
+  #Search-bar {
+    width: 1rem;
+  }
+}

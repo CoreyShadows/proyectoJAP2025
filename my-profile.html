@@ -4,42 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Perfil - eMercado</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="css/my-profile.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<body>
+<body class="bg-light">
 
-  <header>
-    <div class="d-flex align-items-center">
+  <header class="bg-dark py-2 px-3" id="Header-1">
+    <div class="top-bar d-flex justify-content-between align-items-center w-100" id="Logo">
       <a href="index.html">
-      <img src="img/logo-jap.png" alt="Logo" class="img-fluid" style="max-height: 60px;" />
-    </a>
-    </div>
-
-    <form class="d-flex search-bar" role="search" onsubmit="buscar(event)">
-      <input type="search" id="busqueda" placeholder="Buscar..." aria-label="Buscar">
-      <button type="submit">🔍</button>
-    </form>
-
-   <div class="d-flex gap-3 align-items-center" id="Nav-items">
-      <div class="login-items">
-        <a href="login.html" class="text-white"><i class="fa-solid fa-user fa-lg"></i></a>
-        <p id="nombre_usuario"></p>
+        <img src="img/logo-jap.png" alt="Logo" class="img-fluid" />
+      </a>
+      <div id="Search-bar" class="flex-grow-1 mx-3">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Buscar" required>
+          <button class="btn btn-outline-light"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
       </div>
-      <a href="cart.html" class="cart-link text-white position-relative" aria-label="Mi carrito">
-  <i class="fa-solid fa-bag-shopping fa-lg"></i>
-  <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display:none">0</span>
-</a>
+      <div class="d-flex gap-3 align-items-center" id="Nav-items">
+        <div class="login-items d-flex flex-column align-items-center">
+
+          <a href="#" class="nav-link text-white" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user fa-lg"></i></a>
+
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" id="logout">Cerrar sesión</a></li>
+          </ul>
+          
+          <p id="nombre_usuario"></p>
+          
+        </div>
+        <a href="cart.html" class="text-white cart-link position-relative">
+          <i class="fa-solid fa-bag-shopping fa-lg"></i>
+          <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+        </a>
+      </div>
     </div>
   </header>
-<button id="theme-switch">
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="http://www.w3.org/2000/svg" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
-</button>
+  
+  <button id="theme-switch">
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+  </button>
   <main class="profile-card">
     <div class="text-center">
       <img id="previewImage" src="img/avatar.png" class="profile-img mb-2" alt="Foto de perfil">
@@ -77,7 +87,8 @@
     </form>
   </main>
 
-  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -96,6 +107,7 @@
       return;
     } else {
       emailField.value = usuario;
+      nameField.value = usuario;
       document.getElementById("nombre_usuario").textContent = usuario;
     }
 
