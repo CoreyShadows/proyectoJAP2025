@@ -247,11 +247,7 @@ Swal.fire({
   icon: "success",
   title: "¡Compra realizada con éxito!",
   showConfirmButton: false,
-<<<<<<< HEAD
   timer: 5000,
-=======
-  timer: 2000,
->>>>>>> 53edb95364319d9ddd4ede7ac587097b440aed19
   timerProgressBar: true,
 }).then(() => {
   localStorage.removeItem("productosCarrito");
