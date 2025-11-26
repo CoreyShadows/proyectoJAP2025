@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
+  renderCarrito();
+  });
+
+function renderCarrito() {
   const cartContainer = document.getElementById("cart-container");
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
+
+
+  cartContainer.innerHTML = ""; 
 
   if (!productosCarrito || productosCarrito.length === 0) {
     cartContainer.innerHTML = '<p class="text-center mt-4 text-muted">No hay productos en el carrito</p>';
@@ -28,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <input id="cant-${index}" class="form-control text-center flex-shrink-0"
             type="number" value="${producto.cantidad}" min="1" style="width:80px;">
       <p id="sub-${index}" class="m-0 flex-shrink-0 text-truncate" style="min-width:90px;">
-        total: ${subtotal} ${producto.moneda}
+        Subtotal: ${subtotal} ${producto.moneda}
       </p>
     `;
     cartContainer.appendChild(productElement);
@@ -48,29 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
       updateTotal();
       Subtotal();
     });
-    
   });
-  
-});
+}
+
 
 function removeFromCart(index) {
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito"));
+  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
   productosCarrito.splice(index, 1);
   localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-  location.reload();
+
+  if (typeof updateCartBadge === 'function') updateCartBadge();
+
+  // volver a dibujar el carrito sin recargar
+  renderCarrito();
+  updateTotal();
+  Subtotal();
 }
 
 // calcular total inicial
 updateTotal();
 
-// Agregar función para eliminar productos
-function removeProduct(index) {
-  const productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
-  productosCarrito.splice(index, 1);
-  localStorage.setItem("productosCarrito", JSON.stringify(productosCarrito));
-  if (typeof updateCartBadge === 'function') updateCartBadge();
-  location.reload();
-}
 
 // Función que calcula y muestra el total del carrito
 function updateTotal() {
@@ -84,24 +88,47 @@ function updateTotal() {
   }
 }
 
+let subtotal = 0;
+let tipoEnvio = "";
+
 function Subtotal() {
   let productosCarrito = JSON.parse(localStorage.getItem("productosCarrito")) || [];
   subtotal = 0;
-  productosCarrito.forEach(producto => {
-    subtotal += Number(producto.costo) * Number(producto.cantidad);
-  });
-  document.getElementById("subtotalPaso1").textContent = "Subtotal: $" + subtotal;
-  document.getElementById("subtotalPaso2").textContent = "Subtotal: $" + subtotal;
+  
+  const ValorUSD = 40;
 
-   let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
+  productosCarrito.forEach(producto => {
+
+    let costo = Number(producto.costo);
+
+    if (producto.moneda === "USD") {
+      costo = costo * ValorUSD;
+    }
+    subtotal += costo * Number(producto.cantidad);
+  });
+
+  document.getElementById("subtotalPaso1").textContent = "Subtotal: UYU " + subtotal;
+  document.getElementById("subtotalPaso2").textContent = "Subtotal: UYU " + subtotal;
+  document.getElementById("subtotalPaso3").textContent = "UYU " + subtotal;
+  document.getElementById("subtotalFinal").textContent = "UYU " + subtotal;
+
+  let envioSeleccionado = document.querySelector('input[name="envio"]:checked');
   if (envioSeleccionado) {
     let porcentaje = parseFloat(envioSeleccionado.value);
     let costoEnvio = subtotal * porcentaje;
     let total = subtotal + costoEnvio;
 
-    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
-    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
-    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+    document.getElementById("envioCost").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("envioPaso3").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("costoEnvioFinal").textContent = "UYU " + costoEnvio.toFixed(2);
+
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso3").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalFinal").textContent = "UYU " + total.toFixed(2);
+  } else {
+    total = subtotal;
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
   }
 }
 
@@ -202,7 +229,7 @@ document.getElementById("btnFinalizar").addEventListener("click", () => {
   const subtotal = document.getElementById("subtotalPaso1").textContent;
   const envioSeleccionado = document.querySelector('input[name="envio"]:checked');
   const metodoPago = document.getElementById("metodoPago").value;
-  if (subtotal === "$0" || subtotal === "Subtotal: $0") {
+  if (subtotal === "UYU 0" || subtotal === "Subtotal: UYU 0") {
     alerta("El carrito está vacío. Agrega productos antes de finalizar la compra.");
     return;
   }
@@ -220,7 +247,11 @@ Swal.fire({
   icon: "success",
   title: "¡Compra realizada con éxito!",
   showConfirmButton: false,
+<<<<<<< HEAD
   timer: 5000,
+=======
+  timer: 2000,
+>>>>>>> 53edb95364319d9ddd4ede7ac587097b440aed19
   timerProgressBar: true,
 }).then(() => {
   localStorage.removeItem("productosCarrito");
@@ -235,9 +266,9 @@ document.querySelectorAll('input[name="envio"]').forEach(radio => {
     let costoEnvio = subtotal * porcentaje;
     let total = subtotal + costoEnvio;
 
-    document.getElementById("envioCost").textContent = "$" + costoEnvio.toFixed(2);
-    document.getElementById("totalCost").textContent = "$" + total.toFixed(2);
-    document.getElementById("totalPaso4").textContent = "$" + total.toFixed(2);
+    document.getElementById("envioCost").textContent = "UYU " + costoEnvio.toFixed(2);
+    document.getElementById("totalCost").textContent = "UYU " + total.toFixed(2);
+    document.getElementById("totalPaso4").textContent = "UYU " + total.toFixed(2);
     let labelElegido = document.querySelector('label[for="' + this.id + '"]').textContent;
     document.getElementById("envioElegido").textContent = labelElegido;
     tipoEnvio = labelElegido;
