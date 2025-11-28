@@ -1,39 +1,77 @@
-const pool = require('../config/db');
+const fs = require('fs');
+const path = require('path');
 
-exports.getCommentsByProduct = async (req, res) => {
+const commentsPath = path.join(__dirname, '../data/products_comments');
+let commentsData = {};
+
+function loadComments() {
   try {
-    const { productId } = req.params;
-    const conn = await pool.getConnection();
-    const comments = await conn.query(
-      'SELECT * FROM Comments WHERE product_id = ? ORDER BY dateTime DESC',
-      [productId]
-    );
-    conn.release();
-    res.json(comments);
+    // Leer TODOS los archivos .json de la carpeta products_comments/
+    const files = fs.readdirSync(commentsPath).filter(f => f.endsWith('.json'));
+    
+    if (files.length === 0) {
+      console.warn('⚠️  No se encontraron archivos JSON en products_comments/');
+      commentsData = {};
+      return;
+    }
+
+    // Combinar todos los JSON
+    let allComments = {};
+    files.forEach(file => {
+      try {
+        const filePath = path.join(commentsPath, file);
+        const data = fs.readFileSync(filePath, 'utf8');
+        const parsed = JSON.parse(data);
+        
+        // Merging: combinar objetos con IDs de producto
+        if (typeof parsed === 'object' && !Array.isArray(parsed)) {
+          // Si es un objeto { "1": [...], "2": [...] }
+          allComments = { ...allComments, ...parsed };
+        } 
+        // Si es un array directo
+        else if (Array.isArray(parsed)) {
+          // Asumir que el archivo contiene comentarios de un producto
+          // basado en el nombre del archivo o agregarlo bajo una clave genérica
+          allComments['all'] = (allComments['all'] || []).concat(parsed);
+        }
+        
+        console.log(`  ✅ Cargado: ${file}`);
+      } catch (err) {
+        console.warn(`  ⚠️  Error en ${file}:`, err.message);
+      }
+    });
+
+    commentsData = allComments;
+    console.log(`✅ Comentarios cargados`);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Error al cargar comentarios:', error.message);
+    commentsData = {};
   }
-};
+}
 
-exports.createComment = async (req, res) => {
+// Cargar al iniciar
+loadComments();
+
+exports.getCommentsByProduct = (req, res) => {
   try {
     const { productId } = req.params;
-    const { client_id, score, description } = req.body;
-    
-    const conn = await pool.getConnection();
-    const result = await conn.query(
-      'INSERT INTO Comments (product_id, client_id, score, description, dateTime) VALUES (?, ?, ?, ?, NOW())',
-      [productId, client_id || 1, score, description]
-    );
-    conn.release();
-    
-    res.status(201).json({ 
-      message: 'Comentario creado ✅',
-      commentId: result.insertId
+
+    if (Object.keys(commentsData).length === 0) {
+      loadComments();
+    }
+
+    // Buscar comentarios del producto
+    const comments = commentsData[productId] || [];
+
+    res.json({ 
+      status: "ok", 
+      data: comments 
     });
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('Error en getCommentsByProduct:', error);
+    res.status(500).json({ 
+      status: "error", 
+      error: error.message 
+    });
   }
 };

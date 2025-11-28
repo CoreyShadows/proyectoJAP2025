@@ -8,26 +8,34 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Rutas
+// Rutas de API
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
-app.use('/api/customers', require('./routes/customers'));
 
-// Ruta de prueba
+// Health check
 app.get('/api/health', (req, res) => {
-  res.json({ message: '✅ Backend funcionando correctamente' });
+  res.json({ 
+    message: '✅ Backend eMercado funcionando correctamente',
+    timestamp: new Date()
+  });
 });
 
-// Manejo de errores
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Error interno del servidor' });
+// Error 404
+app.use((req, res) => {
+  res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Puerto
+// Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`🗄️  Base de datos: ${process.env.DB_NAME || 'ecommerce'}`);
+  console.log(`\n🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`📡 API disponible en http://localhost:${PORT}/api`);
+  console.log(`\n✅ Endpoints disponibles:`);
+  console.log(`   - GET http://localhost:${PORT}/api/categories`);
+  console.log(`   - GET http://localhost:${PORT}/api/categories/:id`);
+  console.log(`   - GET http://localhost:${PORT}/api/products`);
+  console.log(`   - GET http://localhost:${PORT}/api/products/:id`);
+  console.log(`   - GET http://localhost:${PORT}/api/products/category/:categoryId`);
+  console.log(`   - GET http://localhost:${PORT}/api/comments/:productId\n`);
 });

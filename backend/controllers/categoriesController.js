@@ -1,25 +1,115 @@
-const pool = require('../config/db');
+const fs = require('fs');
+const path = require('path');
 
-exports.getCategories = async (req, res) => {
+const categoriesPath = path.join(__dirname, '../data/cats');
+let categoriesData = [];
+
+function loadCategories() {
   try {
-    const conn = await pool.getConnection();
-    const categories = await conn.query('SELECT * FROM Category');
-    conn.release();
-    res.json(categories);
+    // Leer TODOS los archivos .json de la carpeta cats/
+    const files = fs.readdirSync(categoriesPath).filter(f => f.endsWith('.json'));
+    
+    if (files.length === 0) {
+      console.warn('⚠️  No se encontraron archivos JSON en cats/');
+      categoriesData = [];
+      return;
+    }
+
+    // Combinar todos los JSON en un array
+    let allCategories = [];
+    files.forEach(file => {
+      try {
+        const filePath = path.join(categoriesPath, file);
+        const data = fs.readFileSync(filePath, 'utf8');
+        const parsed = JSON.parse(data);
+        
+        // Si es un array, agregar todos los elementos
+        if (Array.isArray(parsed)) {
+          allCategories = allCategories.concat(parsed);
+        } 
+        // Si es un objeto, agregarlo como un único elemento
+        else {
+          allCategories.push(parsed);
+        }
+        
+        console.log(`  ✅ Cargado: ${file}`);
+      } catch (err) {
+        console.warn(`  ⚠️  Error en ${file}:`, err.message);
+      }
+    });
+
+    categoriesData = allCategories;
+    console.log(`✅ Total de categorías cargadas: ${categoriesData.length}`);
   } catch (error) {
-    console.error('Error:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Error al cargar categorías:', error.message);
+    categoriesData = [];
+  }
+}
+
+// Cargar al iniciar
+loadCategories();
+
+exports.getCategories = (req, res) => {
+  try {
+    if (categoriesData.length === 0) {
+      loadCategories();
+    }
+
+    // Mapear a formato esperado por frontend
+    const mapped = categoriesData.map(cat => ({
+      id: cat.id,
+      name: cat.name,
+      description: cat.description,
+      imgSrc: cat.image || cat.imgSrc,
+      productCount: cat.productCount || 0
+    }));
+
+    res.json({ 
+      status: "ok", 
+      data: mapped 
+    });
+  } catch (error) {
+    console.error('Error en getCategories:', error);
+    res.status(500).json({ 
+      status: "error", 
+      error: error.message 
+    });
   }
 };
 
-exports.getCategoryById = async (req, res) => {
+exports.getCategoryById = (req, res) => {
   try {
     const { id } = req.params;
-    const conn = await pool.getConnection();
-    const category = await conn.query('SELECT * FROM Category WHERE category_id = ?', [id]);
-    conn.release();
-    res.json(category[0] || {});
+    
+    if (categoriesData.length === 0) {
+      loadCategories();
+    }
+
+    const category = categoriesData.find(c => c.id === parseInt(id));
+
+    if (!category) {
+      return res.status(404).json({ 
+        status: "error",
+        error: 'Categoría no encontrada' 
+      });
+    }
+
+    const mapped = {
+      id: category.id,
+      name: category.name,
+      description: category.description,
+      imgSrc: category.image || category.imgSrc,
+      productCount: category.productCount || 0
+    };
+
+    res.json({ 
+      status: "ok", 
+      data: mapped 
+    });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ 
+      status: "error", 
+      error: error.message 
+    });
   }
 };
