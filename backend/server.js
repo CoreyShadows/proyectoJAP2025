@@ -2,23 +2,18 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const verifyToken = require('./middlewares/authMiddleware');
-
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-//Rutas publicas (login)
-app.use('/', require('./routes/auth'));
-
-app.use(verifyToken); // Middleware para verificar token en rutas protegidas
 
 // Rutas de API
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/categories-products', require('./routes/categoriesProducts'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
+app.use('/', require('./routes/auth'));
+
 
 
 app.use((req, res) => {
@@ -28,9 +23,9 @@ app.use((req, res) => {
 // Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`\n🚀 Servidor corriendo en http://localhost:${PORT}`);
-  console.log(`📡 API disponible en http://localhost:${PORT}/api`);
-  console.log(`\n✅ Endpoints disponibles:`);
+  console.log(`\nServidor corriendo en http://localhost:${PORT}`);
+  console.log(`API disponible en http://localhost:${PORT}/api`);
+  console.log(`\nEndpoints disponibles:`);
   console.log(`   - GET http://localhost:${PORT}/api/categories`);
   console.log(`   - GET http://localhost:${PORT}/api/categories/:id`);
   console.log(`   - GET http://localhost:${PORT}/api/products`);
