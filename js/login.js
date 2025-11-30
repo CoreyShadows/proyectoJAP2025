@@ -1,16 +1,42 @@
-document.querySelector("form").addEventListener("submit", function(e){
+document.querySelector("form").addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const contraseña = document.getElementById("password").value;
+    const usuario = document.getElementById("nombre").value.trim();
+    const password = document.getElementById("password").value;
 
-    if (nombre === "" || contraseña === "") {
+    if (usuario === "" || password === "") {
         alert("Por favor, complete todos los campos.");
-    } else {
-        localStorage.setItem("usuarioLogueado", nombre);
-        window.location.href = "index.html"; 
+        return;
     }
-})
+
+    try {
+        const response = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ usuario, password })
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+
+        if (data.token) {
+            localStorage.setItem("token", data.token);
+        } else {
+            localStorage.removeItem("token");
+        }
+
+        localStorage.setItem("usuarioLogueado", usuario);
+
+        window.location.href = "index.html";
+
+    } catch (error) {
+        alert("No se pudo conectar con el servidor");
+    }
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const parrafo_nombre = document.getElementById("nombre_usuario")
