@@ -106,6 +106,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function setProductID(productid) {
+  localStorage.setItem("productID", productid);
+  window.location = "product-info.html";
+  }
+
 // Función para mostrar los productos
 function showProductsList(products) {
   const container = document.querySelector(".row.Main-1");
