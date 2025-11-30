@@ -4,7 +4,6 @@ require('dotenv').config();
 
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
@@ -15,20 +14,13 @@ app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
 app.use('/', require('./routes/auth'));
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    message: '✅ Backend eMercado funcionando correctamente',
-    timestamp: new Date()
-  });
-});
 
-// Error 404
+
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Iniciar servidor
+// Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Servidor corriendo en http://localhost:${PORT}`);
