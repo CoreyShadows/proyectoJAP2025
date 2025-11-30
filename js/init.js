@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3000/api";
 const CATEGORIES_URL = `${BASE_URL}/categories`;
-const PRODUCTS_URL = `${BASE_URL}/products`;
+const PRODUCTS_URL = `${BASE_URL}/categories-products`;
 const PRODUCT_INFO_URL = `${BASE_URL}/products/`;
 const PRODUCT_INFO_COMMENTS_URL = `${BASE_URL}/comments/`;
 const CART_INFO_URL = `${BASE_URL}/cart`;

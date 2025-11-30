@@ -8,76 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const spinner = document.getElementById("spinner-wrapper");
-  spinner.style.display = "block"; // Mostrar spinner
-
-  const container = document.querySelector(".row.Main-1");
-  if (!container) {
-    console.error("No se encontró el contenedor .row");
-    return;
-  }
-
-  const catID = localStorage.getItem("catID");
-
-  if (!catID) {
-    spinner.style.display = "none";
-    container.innerHTML = "<p class='text-danger'>No se seleccionó ninguna categoría.</p>";
-    return;
-  }
-
-  const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
-
-  let productsArray = [];
-
-  fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al cargar el JSON");
-      return response.json();
-    })
-    .then(data => {
-      spinner.style.display = "none"; 
-      productsArray = data.products;
-
-      showProductsList(productsArray);
-
-      const searchInput = document.querySelector('#Search-bar input[type="text"]');
-      searchInput.addEventListener('input', function () {
-        const searchText = this.value.toLowerCase();
-
-        const filtered = productsArray.filter(product =>
-          product.name.toLowerCase().includes(searchText) ||
-          product.description.toLowerCase().includes(searchText)
-        );
-
-        showProductsList(filtered);
-      });
-    })
-    .catch(error => {
-      spinner.style.display = "none"; 
-      console.error("Error:", error);
-      container.innerHTML = "<p class='text-danger'>No se pudo cargar la lista de productos.</p>";
-    });
-});
-
-function setProductID(productid) {
-  localStorage.setItem("productID", productid);
-  window.location = "product-info.html";
-}
-
-function showProductsList(products) {
-  const container = document.querySelector(".row.Main-1");
-  container.innerHTML = ""; // limpiar resultados previos
-
-}
-document.addEventListener("DOMContentLoaded", () => {
-  const parrafo_nombre = document.getElementById("nombre_usuario");
-  const usuario = localStorage.getItem("usuarioLogueado");
-  if (!usuario) {
-    window.location.href = "login.html";
-  } else {
-    parrafo_nombre.innerHTML = usuario;
-  }
-
-  const spinner = document.getElementById("spinner-wrapper");
   const container = document.querySelector(".row.Main-1");
 
   if (!container) {
@@ -93,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const url = `https://japceibal.github.io/emercado-api/cats_products/${catID}.json`;
+  const url = `http://localhost:3000/api/categories-products/${catID}`;
 
   let productsArray = [];
 
@@ -107,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return response.json();
     })
     .then(data => {
-      productsArray = data.products;
+      productsArray = data.data;
       showProductsList(productsArray); // Mostrar los productos
       spinner.style.display = "none"; // Ocultar el spinner después de cargar los productos
     })

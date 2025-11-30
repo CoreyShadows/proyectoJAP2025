@@ -12,19 +12,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const productURL = `https://japceibal.github.io/emercado-api/products/${productID}.json`;
-  const commentsURL = `https://japceibal.github.io/emercado-api/products_comments/${productID}.json`;
+  const productURL = `http://localhost:3000/api/products/${productID}`;
+  const commentsURL = `http://localhost:3000/api/comments/${productID}`;
 
   fetch(productURL)
     .then(res => res.json())
-    .then(product => {
+    .then(response => {
+      const product = response.data;
       renderProduct(product);
       renderRelated(product.relatedProducts);
     });
 
   fetch(commentsURL)
     .then(res => res.json())
-    .then(comments => {
+    .then(response => {
+      const comments = response.data;
       renderComments(comments);
       renderCommentForm();
     })

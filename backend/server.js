@@ -10,6 +10,7 @@ app.use(express.json());
 
 // Rutas de API
 app.use('/api/categories', require('./routes/categories'));
+app.use('/api/categories-products', require('./routes/categoriesProducts'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
 app.use('/', require('./routes/auth'));
