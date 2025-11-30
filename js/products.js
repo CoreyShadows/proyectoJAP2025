@@ -30,22 +30,28 @@ document.addEventListener("DOMContentLoaded", () => {
   // Mostrar el spinner mientras se cargan los productos
   spinner.style.display = "block";
 
+  const token = localStorage.getItem("token");
+
   // Realizar el fetch de los productos
-  fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error("Error al cargar el JSON");
-      return response.json();
-    })
-    .then(data => {
-      productsArray = data.data;
-      showProductsList(productsArray); // Mostrar los productos
-      spinner.style.display = "none"; // Ocultar el spinner después de cargar los productos
-    })
-    .catch(error => {
-      spinner.style.display = "none"; // También ocultamos el spinner si hay un error
-      console.error("Error:", error);
-      container.innerHTML = "<p class='text-danger'>No se pudo cargar la lista de productos.</p>";
-    });
+  fetch(url, {
+    headers: {
+        "access-token": token
+    }
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Error al cargar el JSON");
+    return response.json();
+  })
+  .then(data => {
+    productsArray = data.data;
+    showProductsList(productsArray);
+    spinner.style.display = "none";
+  })
+  .catch(error => {
+    spinner.style.display = "none";
+    console.error("Error:", error);
+    container.innerHTML = "<p class='text-danger'>No se pudo cargar la lista de productos.</p>";
+  });
 
   // Filtro de búsqueda en tiempo real
   const searchInput = document.querySelector('#Search-bar input[type="text"]');

@@ -45,22 +45,29 @@ loadComments();
 
 exports.getCommentsByProduct = (req, res) => {
   try {
-    const { productId } = req.params;
+    const productId = parseInt(req.params.productId);
 
     if (Object.keys(commentsData).length === 0) {
       loadComments();
     }
-    const comments = commentsData[productId] || [];
 
-    res.json({ 
-      status: "ok", 
-      data: comments 
+    let comments = [];
+
+    if (Array.isArray(commentsData.all)) {
+      comments = commentsData.all.filter(
+        c => c.product === productId
+      );
+    }
+
+    res.json({
+      status: "ok",
+      data: comments
     });
   } catch (error) {
     console.error('Error en getCommentsByProduct:', error);
-    res.status(500).json({ 
-      status: "error", 
-      error: error.message 
+    res.status(500).json({
+      status: "error",
+      error: error.message
     });
   }
 };

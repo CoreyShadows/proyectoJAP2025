@@ -15,25 +15,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const productURL = `http://localhost:3000/api/products/${productID}`;
   const commentsURL = `http://localhost:3000/api/comments/${productID}`;
 
-  fetch(productURL)
-    .then(res => res.json())
-    .then(response => {
-      const product = response.data;
-      renderProduct(product);
-      renderRelated(product.relatedProducts);
-    });
+  const token = localStorage.getItem("token");
 
-  fetch(commentsURL)
-    .then(res => res.json())
-    .then(response => {
+  fetch(productURL, {
+    headers: {
+        "access-token": token
+    }
+})
+.then(res => res.json())
+.then(response => {
+    const product = response.data;
+    renderProduct(product);
+    renderRelated(product.relatedProducts);
+});
+
+  fetch(commentsURL, {
+    headers: {
+        "access-token": token
+    }
+  })
+  .then(res => res.json())
+  .then(response => {
       const comments = response.data;
       renderComments(comments);
       renderCommentForm();
-    })
+  })
     .catch(error => {
       console.error("Error al cargar comentarios:", error);
       commentsSection.innerHTML = "<p class='text-danger'>No se pudieron cargar los comentarios.</p>";
-    });
+  });
 
   function renderProduct(product) {
     container.innerHTML = `
