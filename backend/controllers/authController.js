@@ -8,7 +8,7 @@ const login = (req, res) => {
 
     if (!usuario || !password) {
         return res.json({
-            message: "Datos incompletos",
+            message: alerta(),
             token: null
         });
     }
@@ -35,3 +35,5 @@ const login = (req, res) => {
 module.exports = {
     login
 };
+
+
