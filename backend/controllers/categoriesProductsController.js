@@ -33,14 +33,13 @@ function loadCategoriesProducts() {
         });
 
         categoriesProductsData = allCategories;
-        console.log(`✅ Categorías con productos cargadas: ${categoriesProductsData.length}`);
+        console.log(`Categorías con productos cargadas: ${categoriesProductsData.length}`);
     } catch (error) {
-        console.error('❌ Error cargando cats_products:', error.message);
+        console.error('Error cargando cats_products:', error.message);
         categoriesProductsData = [];
     }
 }
 
-// Cargar al iniciar
 loadCategoriesProducts();
 
 /**
@@ -71,7 +70,7 @@ exports.getProductsByCategory = (req, res) => {
             data: category.products
         });
     } catch (error) {
-        console.error('❌ Error en getProductsByCategory:', error);
+        console.error('Error en getProductsByCategory:', error);
         res.status(500).json({
             status: 'error',
             error: error.message
