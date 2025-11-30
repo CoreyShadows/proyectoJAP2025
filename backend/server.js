@@ -2,18 +2,23 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const verifyToken = require('./middlewares/authMiddleware');
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+//Rutas publicas (login)
+app.use('/', require('./routes/auth'));
+
+app.use(verifyToken); // Middleware para verificar token en rutas protegidas
 
 // Rutas de API
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/categories-products', require('./routes/categoriesProducts'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
-app.use('/', require('./routes/auth'));
-
 
 
 app.use((req, res) => {
