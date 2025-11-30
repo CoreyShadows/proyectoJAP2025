@@ -2,33 +2,30 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+const verifyToken = require('./middlewares/authMiddleware');
+
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
+
+//Rutas publicas (login)
+app.use('/', require('./routes/auth'));
+
+app.use(verifyToken); // Middleware para verificar token en rutas protegidas
 
 // Rutas de API
 app.use('/api/categories', require('./routes/categories'));
 app.use('/api/categories-products', require('./routes/categoriesProducts'));
 app.use('/api/products', require('./routes/products'));
 app.use('/api/comments', require('./routes/comments'));
-app.use('/', require('./routes/auth'));
 
-// Health check
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    message: '✅ Backend eMercado funcionando correctamente',
-    timestamp: new Date()
-  });
-});
 
-// Error 404
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });
 });
 
-// Iniciar servidor
+// Iniciar el servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Servidor corriendo en http://localhost:${PORT}`);
