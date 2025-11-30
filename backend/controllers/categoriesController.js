@@ -6,7 +6,6 @@ let categoriesData = [];
 
 function loadCategories() {
   try {
-    // Leer TODOS los archivos .json de la carpeta cats/
     const files = fs.readdirSync(categoriesPath).filter(f => f.endsWith('.json'));
     
     if (files.length === 0) {
@@ -14,39 +13,33 @@ function loadCategories() {
       categoriesData = [];
       return;
     }
-
-    // Combinar todos los JSON en un array
     let allCategories = [];
     files.forEach(file => {
       try {
         const filePath = path.join(categoriesPath, file);
         const data = fs.readFileSync(filePath, 'utf8');
         const parsed = JSON.parse(data);
-        
-        // Si es un array, agregar todos los elementos
         if (Array.isArray(parsed)) {
           allCategories = allCategories.concat(parsed);
         } 
-        // Si es un objeto, agregarlo como un único elemento
         else {
           allCategories.push(parsed);
         }
         
-        console.log(`  ✅ Cargado: ${file}`);
+        console.log(`Cargado: ${file}`);
       } catch (err) {
-        console.warn(`  ⚠️  Error en ${file}:`, err.message);
+        console.warn(`Error en ${file}:`, err.message);
       }
     });
 
     categoriesData = allCategories;
-    console.log(`✅ Total de categorías cargadas: ${categoriesData.length}`);
+    console.log(`Total cargado: ${categoriesData.length}`);
   } catch (error) {
-    console.error('❌ Error al cargar categorías:', error.message);
+    console.error('Error al cargar categorías:', error.message);
     categoriesData = [];
   }
 }
 
-// Cargar al iniciar
 loadCategories();
 
 exports.getCategories = (req, res) => {
@@ -55,7 +48,6 @@ exports.getCategories = (req, res) => {
       loadCategories();
     }
 
-    // Mapear a formato esperado por frontend
     const mapped = categoriesData.map(cat => ({
       id: cat.id,
       name: cat.name,
