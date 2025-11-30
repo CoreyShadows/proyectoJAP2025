@@ -6,7 +6,6 @@ let productsData = [];
 
 function loadProducts() {
   try {
-    // Leer TODOS los archivos .json de la carpeta products/
     const files = fs.readdirSync(productsPath).filter(f => f.endsWith('.json'));
     
     if (files.length === 0) {
@@ -14,39 +13,34 @@ function loadProducts() {
       productsData = [];
       return;
     }
-
-    // Combinar todos los JSON en un array
     let allProducts = [];
     files.forEach(file => {
       try {
         const filePath = path.join(productsPath, file);
         const data = fs.readFileSync(filePath, 'utf8');
         const parsed = JSON.parse(data);
-        
-        // Si es un array, agregar todos los elementos
+
         if (Array.isArray(parsed)) {
           allProducts = allProducts.concat(parsed);
         } 
-        // Si es un objeto, agregarlo como un único elemento
         else {
           allProducts.push(parsed);
         }
         
-        console.log(`  ✅ Cargado: ${file}`);
+        console.log(`Cargado: ${file}`);
       } catch (err) {
-        console.warn(`  ⚠️  Error en ${file}:`, err.message);
+        console.warn(`Error en ${file}:`, err.message);
       }
     });
 
     productsData = allProducts;
-    console.log(`✅ Total de productos cargados: ${productsData.length}`);
+    console.log(`Total de productos cargados: ${productsData.length}`);
   } catch (error) {
-    console.error('❌ Error al cargar productos:', error.message);
+    console.error('Error al cargar productos:', error.message);
     productsData = [];
   }
 }
 
-// Cargar al iniciar
 loadProducts();
 
 exports.getProducts = (req, res) => {
@@ -54,8 +48,6 @@ exports.getProducts = (req, res) => {
     if (productsData.length === 0) {
       loadProducts();
     }
-
-    // Mapear a formato esperado
     const mapped = productsData.map(prod => ({
       id: prod.id,
       name: prod.name,
